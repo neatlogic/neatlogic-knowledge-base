@@ -1,13 +1,12 @@
 package codedriver.framework.knowledge.source;
 
+import codedriver.framework.knowledge.dto.SyncSourceVo;
+import org.reflections.Reflections;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.reflections.Reflections;
-
-import codedriver.framework.knowledge.dto.SyncSourceVo;
 
 public class SyncSourceFactory {
 	private static Map<String, SyncSourceVo> syncSourceMap = new HashMap<String, SyncSourceVo>();
@@ -27,7 +26,7 @@ public class SyncSourceFactory {
 			}
 		}
 	}
-	public static Map<String,SyncSourceVo> getUserProfileMap() {
+	public static Map<String,SyncSourceVo> getSourceMap() {
 		return syncSourceMap;
 	}
 	
