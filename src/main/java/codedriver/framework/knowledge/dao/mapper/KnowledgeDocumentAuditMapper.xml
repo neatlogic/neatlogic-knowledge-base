@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="codedriver.framework.knowledge.dao.mapper.KnowledgeDocumentAuditMapper">
+
+    <select id="getKnowledgeDocumentAuditListByKnowledgeDocumentId"
+            parameterType="codedriver.framework.knowledge.dto.KnowledgeDocumentAuditVo"
+            resultType="codedriver.framework.knowledge.dto.KnowledgeDocumentAuditVo">
+        SELECT
+        `knowledge_document_id` AS knowledgeDocumentId,
+        `knowledge_document_version_id` AS knowledgeDocumentVersionId,
+        `fcu`,
+        `operate`,
+        `fcd`,
+        `config_hash` AS configHash
+        FROM `knowledge_document_audit`
+        WHERE `knowledge_document_id` = #{knowledgeDocumentId}
+        ORDER BY `fcd` DESC
+        <if test="needPage">
+            LIMIT #{startNum}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="getKnowledgeDocumentAuditListByDocumentIdAndVersionIdAndOperate"
+            parameterType="codedriver.framework.knowledge.dto.KnowledgeDocumentAuditVo"
+            resultType="codedriver.framework.knowledge.dto.KnowledgeDocumentAuditVo">
+        SELECT `knowledge_document_id`         AS knowledgeDocumentId,
+               `knowledge_document_version_id` AS knowledgeDocumentVersionId,
+               `fcu`,
+               `operate`,
+               `fcd`,
+               `config_hash`                   AS configHash
+        FROM `knowledge_document_audit`
+        WHERE `knowledge_document_id` = #{knowledgeDocumentId}
+          and `knowledge_document_version_id` = #{knowledgeDocumentVersionId}
+          and `operate` = #{operate}
+        ORDER BY `fcd` DESC
+        LIMIT 1
+    </select>
+
+    <select id="getKnowledgeDocumentAuditCountByKnowledgeDocumentId"
+            parameterType="codedriver.framework.knowledge.dto.KnowledgeDocumentAuditVo" resultType="int">
+        SELECT COUNT(1)
+        FROM `knowledge_document_audit`
+        WHERE `knowledge_document_id` = #{knowledgeDocumentId}
+    </select>
+
+    <select id="getKnowledgeDocumentAuditListByDocumentVersionIdListAndOperate"
+            parameterType="codedriver.framework.knowledge.dto.KnowledgeDocumentAuditVo"
+            resultType="codedriver.framework.knowledge.dto.KnowledgeDocumentAuditVo">
+        SELECT
+        `knowledge_document_version_id` AS knowledgeDocumentVersionId,
+        (SELECT c.config
+        FROM knowledge_document_audit b
+        LEFT JOIN knowledge_document_audit_detail c ON b.config_hash = c.hash
+        WHERE b.knowledge_document_version_id = a.knowledge_document_version_id
+        AND b.fcd = MAX(a.`fcd`)) AS configStr
+        FROM `knowledge_document_audit` a
+        WHERE `knowledge_document_version_id` IN
+        <foreach collection="versionIdList" item="versionId" open="(" close=")" separator=",">
+            #{versionId}
+        </foreach>
+        AND `operate` = #{operate}
+        GROUP BY knowledge_document_version_id
+    </select>
+
+    <select id="getKnowledgeDocumentAuditDetailStringByHash" parameterType="java.lang.String"
+            resultType="java.lang.String">
+        SELECT `config`
+        FROM `knowledge_document_audit_detail`
+        WHERE `hash` = #{value}
+    </select>
+
+    <insert id="insertKnowledgeDocumentAudit" parameterType="codedriver.framework.knowledge.dto.KnowledgeDocumentAuditVo">
+        INSERT INTO `knowledge_document_audit` (`knowledge_document_id`,
+                                                `knowledge_document_version_id`,
+                                                `fcu`,
+                                                `operate`,
+                                                `fcd`,
+                                                `config_hash`)
+        VALUES (#{knowledgeDocumentId},
+                #{knowledgeDocumentVersionId},
+                #{fcu},
+                #{operate},
+                NOW(3),
+                #{configHash})
+    </insert>
+
+    <insert id="insertKnowledgeDocumentAuditDetail"
+            parameterType="codedriver.framework.knowledge.dto.KnowledgeDocumentAuditDetailVo">
+        INSERT IGNORE INTO `knowledge_document_audit_detail` (`hash`, `config`)
+        VALUES (#{hash}, #{config})
+    </insert>
+
+</mapper>
