@@ -68,15 +68,33 @@ public class FigureLineHandler extends LineHandlerBase {
     }
 
     @Override
-    public String convertHtmlToContent(Element element) {
+    public String myConvertHtmlToConfig(Element element) {
         Elements elements = element.getElementsByTag(KnowledgeDocumentLineHandler.TABLE.getValue());
-        if (CollectionUtils.isEmpty(elements)) {
-            elements = element.getElementsByTag(KnowledgeDocumentLineHandler.IMG.getValue());
-        }
         if (CollectionUtils.isNotEmpty(elements)) {
-            return LineHandlerFactory.getHandler(KnowledgeDocumentLineHandler.TABLE.getValue()).convertHtmlToContent(elements.get(0));
+            return LineHandlerFactory.getHandler(KnowledgeDocumentLineHandler.TABLE.getValue()).convertHtmlToConfig(elements.get(0));
+        }
+        elements = element.getElementsByTag(KnowledgeDocumentLineHandler.IMG.getValue());
+        if (CollectionUtils.isNotEmpty(elements)) {
+            return LineHandlerFactory.getHandler(KnowledgeDocumentLineHandler.IMG.getValue()).convertHtmlToConfig(elements.get(0));
         }
         return null;
     }
 
+    @Override
+    public String myConvertHtmlToContent(Element element) {
+        return null;
+    }
+
+    @Override
+    public String myRealHandler(Element element){
+        Elements elements = element.getElementsByTag(KnowledgeDocumentLineHandler.TABLE.getValue());
+        if (CollectionUtils.isNotEmpty(elements)) {
+            return KnowledgeDocumentLineHandler.TABLE.getValue();
+        }
+        elements = element.getElementsByTag(KnowledgeDocumentLineHandler.IMG.getValue());
+        if (CollectionUtils.isNotEmpty(elements)) {
+            return KnowledgeDocumentLineHandler.IMG.getValue();
+        }
+        return KnowledgeDocumentLineHandler.P.getValue();
+    }
 }

@@ -75,7 +75,7 @@ public class ImgLineHandler extends LineHandlerBase {
     }
 
     @Override
-    protected String myConvertHtmlToContent(Element element) {
+    protected String myConvertHtmlToConfig(Element element) {
         JSONObject imgJson = new JSONObject();
         String src = element.attr("src");
         Long fileId = null;
@@ -93,8 +93,13 @@ public class ImgLineHandler extends LineHandlerBase {
             imgJson.put("title",file.getName());
             imgJson.put("align","left");
             imgJson.put("value", StringUtils.EMPTY);
-            imgJson.put("url",file.getUrl());
+            imgJson.put("url",src);
         }
         return imgJson.toString();
+    }
+
+    @Override
+    public String myConvertHtmlToContent(Element element) {
+        return null;
     }
 }

@@ -6,7 +6,6 @@
 package codedriver.framework.knowledge.linehandler.core;
 
 import codedriver.framework.knowledge.dto.KnowledgeDocumentLineVo;
-import org.apache.commons.lang3.StringUtils;
 import org.jsoup.nodes.Element;
 
 public abstract class LineHandlerBase implements ILineHandler {
@@ -19,17 +18,13 @@ public abstract class LineHandlerBase implements ILineHandler {
      */
     @Override
     public String convertContentToHtml(KnowledgeDocumentLineVo line) {
-        String myHtml = myConvertContentToHtml(line);
-        if (StringUtils.isNotBlank(myHtml)) {
-            return myHtml;
-        }
-        return "<" + this.getHandler() + ">"
-                + (line.getContent() != null ? line.getContent() : "")
-                + "</" + this.getHandler() + ">";
+        return myConvertContentToHtml(line);
     }
 
     protected String myConvertContentToHtml(KnowledgeDocumentLineVo line) {
-        return null;
+        return "<" + this.getHandler() + ">"
+                + (line.getContent() != null ? line.getContent() : "")
+                + "</" + this.getHandler() + ">";
     }
 
     /**
@@ -40,14 +35,29 @@ public abstract class LineHandlerBase implements ILineHandler {
      */
     @Override
     public String convertHtmlToContent(Element element) {
-        String myContent = myConvertHtmlToContent(element);
-        if (StringUtils.isNotBlank(myContent)) {
-            return myContent;
-        }
-        return element.html();
+        return myConvertHtmlToContent(element);
     }
 
     protected String myConvertHtmlToContent(Element element) {
+        return element.html();
+    }
+
+
+    @Override
+    public String convertHtmlToConfig(Element element) {
+        return myConvertHtmlToConfig(element);
+    }
+
+    protected String myConvertHtmlToConfig(Element element) {
         return null;
+    }
+
+    @Override
+    public String getRealHandler(Element element){
+        return  myRealHandler(element);
+    }
+
+    protected String myRealHandler(Element element){
+        return getHandler();
     }
 }

@@ -92,7 +92,7 @@ public class TableLineHandler extends LineHandlerBase {
     }
 
     @Override
-    protected String myConvertHtmlToContent(Element element) {
+    protected String myConvertHtmlToConfig(Element element) {
         Elements trElements = element.getElementsByTag(HTML.Tag.TR);
         return new JSONObject() {{
             put("headerList", CollectionUtils.EMPTY_COLLECTION);
@@ -101,12 +101,23 @@ public class TableLineHandler extends LineHandlerBase {
             String[][] tableData = new String[trElements.size()][];
             for (int i = 0; i < trElements.size(); i++) {
                 Elements tdElements = trElements.get(i).getElementsByTag(HTML.Tag.TD);
+                tableData[i] = new String[tdElements.size()];
                 for (int j = 0; j < tdElements.size(); j++) {
-                    tableData[i][j] = tdElements.get(j).html();
+                    Elements spanElements = tdElements.get(j).getElementsByTag(HTML.Tag.SPAN);
+                    if (CollectionUtils.isNotEmpty(spanElements)) {
+                        tableData[i][j] = spanElements.get(0).html();
+                    } else {
+                        tableData[i][j] = tdElements.get(j).html();
+                    }
                 }
             }
             put("tableList", tableData);
         }}.toString();
+    }
+
+    @Override
+    public String myConvertHtmlToContent(Element element) {
+        return null;
     }
 
 }
