@@ -61,6 +61,11 @@ public class FigureLineHandler extends LineHandlerBase {
     }
 
     @Override
+    public boolean needCompare() {
+        return false;
+    }
+
+    @Override
     public String convertHtmlToContent(Element element) {
         Elements elements = element.getElementsByTag(KnowledgeDocumentLineHandler.TABLE.getValue());
         if (CollectionUtils.isEmpty(elements)) {

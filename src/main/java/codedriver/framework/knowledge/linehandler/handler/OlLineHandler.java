@@ -41,7 +41,7 @@ public class OlLineHandler extends LineHandlerBase {
      */
     @Override
     public String getMainBody(KnowledgeDocumentLineVo line) {
-        return null;
+        return line.getContent();
     }
 
     /**
@@ -52,6 +52,11 @@ public class OlLineHandler extends LineHandlerBase {
      */
     @Override
     public void setMainBody(KnowledgeDocumentLineVo line, String mainBody) {
+        line.setContent(mainBody);
+    }
 
+    @Override
+    public boolean needCompare() {
+        return true;
     }
 }

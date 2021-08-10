@@ -36,37 +36,37 @@ public enum KnowledgeDocumentLineHandler {
         return value;
     }
 
-    public String getText() {
-        return text;
-    }
+//    public String getText() {
+//        return text;
+//    }
 
-    public static BiConsumer<KnowledgeDocumentLineVo, String> getMainBodySet(String _value){
-        for(KnowledgeDocumentLineHandler handler : values()) {
-            if(handler.value.equals(_value)) {
-                return handler.mainBodySet;
-            }
-        }
-        return null;
-    }
-    public static String getMainBody(KnowledgeDocumentLineVo line){
-        for(KnowledgeDocumentLineHandler handler : values()) {
-            if(handler.value.equals(line.getHandler())) {
-                if(handler.mainBodyGet != null) {
-                    return handler.mainBodyGet.apply(line); 
-                }
-                return null;
-            }
-        }
-        return null;
-    }
-    public static void setMainBody(KnowledgeDocumentLineVo line, String mainBody){
-        for(KnowledgeDocumentLineHandler handler : values()) {
-            if(handler.value.equals(line.getHandler())) {
-                if(handler.mainBodySet != null) {
-                    handler.mainBodySet.accept(line, mainBody);
-                }
-                return;
-            }
-        }
-    }
+//    public static BiConsumer<KnowledgeDocumentLineVo, String> getMainBodySet(String _value){
+//        for(KnowledgeDocumentLineHandler handler : values()) {
+//            if(handler.value.equals(_value)) {
+//                return handler.mainBodySet;
+//            }
+//        }
+//        return null;
+//    }
+//    public static String getMainBody(KnowledgeDocumentLineVo line){
+//        for(KnowledgeDocumentLineHandler handler : values()) {
+//            if(handler.value.equals(line.getHandler())) {
+//                if(handler.mainBodyGet != null) {
+//                    return handler.mainBodyGet.apply(line);
+//                }
+//                return null;
+//            }
+//        }
+//        return null;
+//    }
+//    public static void setMainBody(KnowledgeDocumentLineVo line, String mainBody){
+//        for(KnowledgeDocumentLineHandler handler : values()) {
+//            if(handler.value.equals(line.getHandler())) {
+//                if(handler.mainBodySet != null) {
+//                    handler.mainBodySet.accept(line, mainBody);
+//                }
+//                return;
+//            }
+//        }
+//    }
 }
