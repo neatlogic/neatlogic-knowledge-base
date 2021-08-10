@@ -12,11 +12,13 @@ import codedriver.framework.knowledge.linehandler.core.LineHandlerFactory;
 import org.apache.commons.collections4.CollectionUtils;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 /**
  * @author lvzk
  * @since 2021/8/9 18:48
  **/
+@Component
 public class FigureLineHandler extends LineHandlerBase {
     /**
      * 获取组件英文名
