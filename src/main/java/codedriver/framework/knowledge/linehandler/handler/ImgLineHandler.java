@@ -55,7 +55,7 @@ public class ImgLineHandler extends LineHandlerBase {
      */
     @Override
     public String getMainBody(KnowledgeDocumentLineVo line) {
-        return null;
+        return line.getConfig().getString("url");
     }
 
     /**
@@ -67,6 +67,11 @@ public class ImgLineHandler extends LineHandlerBase {
     @Override
     public void setMainBody(KnowledgeDocumentLineVo line, String mainBody) {
 
+    }
+
+    @Override
+    public boolean needCompare() {
+        return false;
     }
 
     @Override

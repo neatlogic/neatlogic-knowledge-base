@@ -1,8 +1,9 @@
 package codedriver.framework.knowledge.dto;
 
 import codedriver.framework.common.constvalue.ApiParamType;
+import codedriver.framework.knowledge.linehandler.core.ILineHandler;
+import codedriver.framework.knowledge.linehandler.core.LineHandlerFactory;
 import codedriver.framework.restful.annotation.EntityField;
-import codedriver.framework.knowledge.constvalue.KnowledgeDocumentLineHandler;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
@@ -102,7 +103,11 @@ public class KnowledgeDocumentLineVo {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((handler == null) ? 0 : handler.hashCode());
-        String mainBody = KnowledgeDocumentLineHandler.getMainBody(this);
+        String mainBody = null;
+        ILineHandler lineHandler = LineHandlerFactory.getHandler(handler);
+        if (lineHandler != null) {
+            mainBody = lineHandler.getMainBody(this);
+        }
         result = prime * result + ((mainBody == null) ? 0 : mainBody.hashCode());
         return result;
     }
@@ -120,6 +125,10 @@ public class KnowledgeDocumentLineVo {
                 return false;
         } else if (!handler.equals(other.handler))
             return false;
-        return Objects.equals(KnowledgeDocumentLineHandler.getMainBody(this), KnowledgeDocumentLineHandler.getMainBody(other));
+        ILineHandler lineHandler = LineHandlerFactory.getHandler(handler);
+        if (lineHandler == null) {
+            return true;
+        }
+        return Objects.equals(lineHandler.getMainBody(this), lineHandler.getMainBody(other));
     }
 }

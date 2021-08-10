@@ -42,6 +42,11 @@ public interface ILineHandler {
     void setMainBody(KnowledgeDocumentLineVo line, String mainBody);
 
     /**
+     * 内容是否需要对比
+     * @return
+     */
+    boolean needCompare();
+    /**
      * 将contend 转为 html
      *
      * @param line 行对象
