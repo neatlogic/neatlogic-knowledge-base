@@ -8,11 +8,13 @@ package codedriver.framework.knowledge.linehandler.handler;
 import codedriver.framework.knowledge.dto.KnowledgeDocumentLineVo;
 import codedriver.framework.knowledge.linehandler.core.LineHandlerBase;
 import com.alibaba.fastjson.JSONObject;
+import org.springframework.stereotype.Component;
 
 /**
  * @author lvzk
  * @since 2021/8/9 18:48
  **/
+@Component
 public class CodeLineHandler extends LineHandlerBase {
     /**
      * 获取组件英文名

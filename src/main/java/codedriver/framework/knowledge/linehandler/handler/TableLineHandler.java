@@ -9,13 +9,17 @@ import codedriver.framework.knowledge.dto.KnowledgeDocumentLineVo;
 import codedriver.framework.knowledge.linehandler.core.LineHandlerBase;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.itextpdf.tool.xml.html.HTML;
 import org.apache.commons.collections4.CollectionUtils;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Component;
 
 /**
  * @author lvzk
  * @since 2021/8/9 18:48
  **/
+@Component
 public class TableLineHandler extends LineHandlerBase {
     /**
      * 获取组件英文名
@@ -84,7 +88,20 @@ public class TableLineHandler extends LineHandlerBase {
 
     @Override
     protected String myConvertHtmlToContent(Element element) {
-        return null;
+        Elements trElements = element.getElementsByTag(HTML.Tag.TR);
+        return new JSONObject() {{
+            put("headerList", CollectionUtils.EMPTY_COLLECTION);
+            put("mergeData", CollectionUtils.EMPTY_COLLECTION);
+            put("lefterList", CollectionUtils.EMPTY_COLLECTION);
+            String[][] tableData = new String[trElements.size()][];
+            for (int i = 0; i < trElements.size(); i++) {
+                Elements tdElements = trElements.get(i).getElementsByTag(HTML.Tag.TD);
+                for (int j = 0; j < tdElements.size(); j++) {
+                    tableData[i][j] = tdElements.get(j).html();
+                }
+            }
+            put("tableList", tableData);
+        }}.toString();
     }
 
 }
