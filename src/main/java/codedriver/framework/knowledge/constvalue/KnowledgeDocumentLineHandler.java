@@ -5,8 +5,6 @@ import codedriver.framework.knowledge.dto.KnowledgeDocumentLineVo;
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
-//import com.alibaba.fastjson.JSON;
-
 public enum KnowledgeDocumentLineHandler {
 
     P("p", "段落", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
@@ -14,8 +12,6 @@ public enum KnowledgeDocumentLineHandler {
     H2("h2", "二级标题", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
     IMG("img", "图片", (line) -> line.getConfig().getString("url"), null),
     TABLE("table", "表格", (line) -> line.getConfig().getString("tableList"), null),
-//    TABLE("table", "表格", (line) -> null, (line, mainBody) -> line.getConfig().put("tableList", JSON.parseArray(mainBody))),
-//    CODE("code", "代码块", (line) -> line.getConfig().getString("value"), (line, mainBody) -> line.getConfig().put("value", mainBody)),
     CODE("code", "代码块", (line) -> line.getConfig().getString("value"), null),
     FORMTABLE("formtable", "表单", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
     EDITOR("editor", "编辑器", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
