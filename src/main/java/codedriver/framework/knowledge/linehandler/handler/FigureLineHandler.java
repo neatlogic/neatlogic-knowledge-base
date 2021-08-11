@@ -82,6 +82,14 @@ public class FigureLineHandler extends LineHandlerBase {
 
     @Override
     public String myConvertHtmlToContent(Element element) {
+        Elements elements = element.getElementsByTag(KnowledgeDocumentLineHandler.TABLE.getValue());
+        if (CollectionUtils.isNotEmpty(elements)) {
+            return LineHandlerFactory.getHandler(KnowledgeDocumentLineHandler.TABLE.getValue()).convertHtmlToContent(elements.get(0));
+        }
+        elements = element.getElementsByTag(KnowledgeDocumentLineHandler.IMG.getValue());
+        if (CollectionUtils.isNotEmpty(elements)) {
+            return LineHandlerFactory.getHandler(KnowledgeDocumentLineHandler.IMG.getValue()).convertHtmlToContent(elements.get(0));
+        }
         return null;
     }
 
@@ -89,11 +97,11 @@ public class FigureLineHandler extends LineHandlerBase {
     public String myRealHandler(Element element){
         Elements elements = element.getElementsByTag(KnowledgeDocumentLineHandler.TABLE.getValue());
         if (CollectionUtils.isNotEmpty(elements)) {
-            return KnowledgeDocumentLineHandler.TABLE.getValue();
+            return LineHandlerFactory.getHandler(KnowledgeDocumentLineHandler.TABLE.getValue()).getRealHandler(elements.get(0));
         }
         elements = element.getElementsByTag(KnowledgeDocumentLineHandler.IMG.getValue());
         if (CollectionUtils.isNotEmpty(elements)) {
-            return KnowledgeDocumentLineHandler.IMG.getValue();
+            return LineHandlerFactory.getHandler(KnowledgeDocumentLineHandler.IMG.getValue()).getRealHandler(elements.get(0));
         }
         return KnowledgeDocumentLineHandler.P.getValue();
     }

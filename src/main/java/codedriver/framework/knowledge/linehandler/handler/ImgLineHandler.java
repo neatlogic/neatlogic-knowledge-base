@@ -7,6 +7,7 @@ package codedriver.framework.knowledge.linehandler.handler;
 
 import codedriver.framework.file.dao.mapper.FileMapper;
 import codedriver.framework.file.dto.FileVo;
+import codedriver.framework.knowledge.constvalue.KnowledgeDocumentLineHandler;
 import codedriver.framework.knowledge.dto.KnowledgeDocumentLineVo;
 import codedriver.framework.knowledge.linehandler.core.LineHandlerBase;
 import com.alibaba.fastjson.JSONObject;
@@ -94,12 +95,35 @@ public class ImgLineHandler extends LineHandlerBase {
             imgJson.put("align","left");
             imgJson.put("value", StringUtils.EMPTY);
             imgJson.put("url",src);
+            return imgJson.toString();
+        }else{
+            return null;
         }
-        return imgJson.toString();
     }
 
     @Override
     public String myConvertHtmlToContent(Element element) {
+        String src = element.attr("src");
+        String regular = "[\\?|\\&]?id=([^&]*)";
+        Pattern p = Pattern.compile(regular);
+        Matcher m = p.matcher(src);
+        boolean result = m.find();
+        if(!result){
+            return element.outerHtml();
+        }
         return null;
+    }
+
+    @Override
+    public String myRealHandler(Element element){
+        String src = element.attr("src");
+        String regular = "[\\?|\\&]?id=([^&]*)";
+        Pattern p = Pattern.compile(regular);
+        Matcher m = p.matcher(src);
+        boolean result = m.find();
+        if(!result){
+            return KnowledgeDocumentLineHandler.P.getValue();
+        }
+        return KnowledgeDocumentLineHandler.IMG.getValue();
     }
 }

@@ -7,6 +7,7 @@ package codedriver.framework.knowledge.linehandler.handler;
 
 import codedriver.framework.knowledge.dto.KnowledgeDocumentLineVo;
 import codedriver.framework.knowledge.linehandler.core.LineHandlerBase;
+import codedriver.framework.util.HtmlUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.itextpdf.tool.xml.html.HTML;
@@ -93,26 +94,27 @@ public class TableLineHandler extends LineHandlerBase {
 
     @Override
     protected String myConvertHtmlToConfig(Element element) {
+        JSONObject tableJson = new JSONObject();
         Elements trElements = element.getElementsByTag(HTML.Tag.TR);
-        return new JSONObject() {{
-            put("headerList", CollectionUtils.EMPTY_COLLECTION);
-            put("mergeData", CollectionUtils.EMPTY_COLLECTION);
-            put("lefterList", CollectionUtils.EMPTY_COLLECTION);
-            String[][] tableData = new String[trElements.size()][];
-            for (int i = 0; i < trElements.size(); i++) {
-                Elements tdElements = trElements.get(i).getElementsByTag(HTML.Tag.TD);
-                tableData[i] = new String[tdElements.size()];
-                for (int j = 0; j < tdElements.size(); j++) {
-                    Elements spanElements = tdElements.get(j).getElementsByTag(HTML.Tag.SPAN);
-                    if (CollectionUtils.isNotEmpty(spanElements)) {
-                        tableData[i][j] = spanElements.get(0).html();
-                    } else {
-                        tableData[i][j] = tdElements.get(j).html();
-                    }
+        tableJson.put("headerList", CollectionUtils.EMPTY_COLLECTION);
+        tableJson.put("mergeData", CollectionUtils.EMPTY_COLLECTION);
+        tableJson.put("lefterList", CollectionUtils.EMPTY_COLLECTION);
+        String[][] tableData = new String[trElements.size()][];
+        for (int i = 0; i < trElements.size(); i++) {
+            Elements tdElements = trElements.get(i).getElementsByTag(HTML.Tag.TD);
+            tableData[i] = new String[tdElements.size()];
+            for (int j = 0; j < tdElements.size(); j++) {
+                Elements spanElements = tdElements.get(j).getElementsByTag(HTML.Tag.SPAN);
+                if (CollectionUtils.isNotEmpty(spanElements)) {
+                    tableData[i][j] = HtmlUtil.decodeHtml(spanElements.get(0).html());
+                } else {
+                    tableData[i][j] = HtmlUtil.decodeHtml(tdElements.get(j).html());
                 }
             }
-            put("tableList", tableData);
-        }}.toString();
+        }
+        tableJson.put("tableList", tableData);
+        return tableJson.toString();
+
     }
 
     @Override
