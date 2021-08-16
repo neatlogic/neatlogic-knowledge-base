@@ -5,15 +5,17 @@
 
 package codedriver.framework.knowledge.linehandler.core;
 
-import codedriver.framework.applicationlistener.core.ApplicationListenerBase;
+import codedriver.framework.applicationlistener.core.ModuleInitializedListenerBase;
+import codedriver.framework.bootstrap.CodedriverWebApplicationContext;
 import codedriver.framework.common.RootComponent;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.event.ContextRefreshedEvent;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @RootComponent
-public class LineHandlerFactory extends ApplicationListenerBase {
+public class LineHandlerFactory extends ModuleInitializedListenerBase {
     private static final Map<String, ILineHandler> handlerMap = new HashMap<>();
     private static final List<ILineHandler> handlerList = new ArrayList<>();
 
@@ -26,8 +28,7 @@ public class LineHandlerFactory extends ApplicationListenerBase {
     }
 
     @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
-        ApplicationContext context = event.getApplicationContext();
+    public void onInitialized(CodedriverWebApplicationContext context) {
         Map<String, ILineHandler> myMap = context.getBeansOfType(ILineHandler.class);
         for (Map.Entry<String, ILineHandler> entry : myMap.entrySet()) {
             ILineHandler handler = entry.getValue();
