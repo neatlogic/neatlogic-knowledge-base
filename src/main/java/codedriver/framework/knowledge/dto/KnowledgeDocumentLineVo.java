@@ -6,6 +6,7 @@ import codedriver.framework.knowledge.linehandler.core.LineHandlerFactory;
 import codedriver.framework.restful.annotation.EntityField;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Objects;
@@ -19,12 +20,17 @@ public class KnowledgeDocumentLineVo {
     private String changeType;
     private JSONObject config;
     private Integer lineNumber;
-    private transient Long knowledgeDocumentId;
+    @JSONField(serialize = false)
+    private Long knowledgeDocumentId;
 //    @ESKey(type = ESKeyType.PKEY, name = "documentId")
-    private transient Long knowledgeDocumentVersionId;
-    private transient String contentHash;
-    private transient String configHash;
-    private transient String configStr;
+    @JSONField(serialize = false)
+    private Long knowledgeDocumentVersionId;
+    @JSONField(serialize = false)
+    private String contentHash;
+    @JSONField(serialize = false)
+    private String configHash;
+    @JSONField(serialize = false)
+    private String configStr;
     public KnowledgeDocumentLineVo() {
     }
     public KnowledgeDocumentLineVo(Integer lineNumber, String handler, String content) {

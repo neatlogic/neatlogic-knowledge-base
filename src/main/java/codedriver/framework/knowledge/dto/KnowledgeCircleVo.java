@@ -6,6 +6,7 @@ import codedriver.framework.common.dto.BasePageVo;
 import codedriver.framework.dto.UserVo;
 import codedriver.framework.restful.annotation.EntityField;
 import codedriver.framework.util.SnowflakeUtil;
+import com.alibaba.fastjson.annotation.JSONField;
 import org.apache.commons.collections4.CollectionUtils;
 
 import java.util.ArrayList;
@@ -33,7 +34,8 @@ public class KnowledgeCircleVo extends BasePageVo {
 	private List<KnowledgeDocumentTypeVo> documentTypeList;
 
 	/** 知识圈关联的所有对象，包括用户、组、角色 */
-	private transient List<KnowledgeCircleUserVo> authList;
+	@JSONField(serialize = false)
+	private List<KnowledgeCircleUserVo> authList;
 
 	public KnowledgeCircleVo() {}
 

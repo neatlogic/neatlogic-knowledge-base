@@ -90,11 +90,11 @@ public class KnowledgeDocumentVo extends BaseEditorVo {
     @EntityField(name = "当前用户是否是成员", type = ApiParamType.INTEGER)
     private Integer isMember;
     @JSONField(serialize=false)
-    private transient Integer isDelete;
+    private Integer isDelete;
     @JSONField(serialize=false)
-    private transient boolean isAutoGenerateId = true;
+    private boolean isAutoGenerateId = true;
     @JSONField(serialize=false)
-    private transient String type;
+    private String type;
     @JSONField(serialize=false)
     private List<Long> knowledgeDocumentIdList;
     @JSONField(serialize=false)
