@@ -22,24 +22,25 @@ public class KnowledgeDocumentTypeVo {
 	private String parentUuid;
 	@JSONField(serialize = false)
 	@EntityField(name = "左编码", type = ApiParamType.INTEGER)
-	private transient Integer lft;
+	private Integer lft;
 	@JSONField(serialize = false)
 	@EntityField(name = "右编码", type = ApiParamType.INTEGER)
-	private transient Integer rht;
+	private Integer rht;
 	@JSONField(serialize = false)
 	@EntityField(name = "排序（相对于同级节点的顺序）", type = ApiParamType.INTEGER)
-	private transient Integer sort;
+	private Integer sort;
 	@EntityField(name = "子节点数量", type = ApiParamType.INTEGER)
 	private Integer childCount;
 	@EntityField(name = "关联的知识文档数", type = ApiParamType.INTEGER)
 	private Integer documentCount;
 
-	private transient KnowledgeDocumentTypeVo parent;
+	@JSONField(serialize = false)
+	private KnowledgeDocumentTypeVo parent;
 
 	private List<KnowledgeDocumentTypeVo> children = new ArrayList<>();
 
 	@JSONField(serialize = false)
-	private transient String keyword;
+	private String keyword;
 
 	public KnowledgeDocumentTypeVo() {}
 

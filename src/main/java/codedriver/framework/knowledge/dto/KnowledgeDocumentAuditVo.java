@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import codedriver.framework.common.constvalue.ApiParamType;
 import codedriver.framework.common.dto.BaseEditorVo;
 import codedriver.framework.restful.annotation.EntityField;
+import com.alibaba.fastjson.annotation.JSONField;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -21,8 +22,10 @@ public class KnowledgeDocumentAuditVo extends BaseEditorVo {
     @EntityField(name = "内容", type = ApiParamType.STRING)
     private String content;
     private String configStr;
-    private transient JSONObject config;
-    private transient String configHash;
+    @JSONField(serialize = false)
+    private JSONObject config;
+    @JSONField(serialize = false)
+    private String configHash;
 
     public Long getKnowledgeDocumentId() {
         return KnowledgeDocumentId;

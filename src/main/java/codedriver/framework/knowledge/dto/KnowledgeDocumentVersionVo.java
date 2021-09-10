@@ -77,9 +77,9 @@ public class KnowledgeDocumentVersionVo extends BaseEditorVo {
     @EntityField(name = "行数据列表", type = ApiParamType.JSONARRAY)
     private List<KnowledgeDocumentLineVo> knowledgeDocumentLineList = new ArrayList<>();
     @JSONField(serialize = false)
-    private transient boolean isAutoGenerateId = true;
+    private boolean isAutoGenerateId = true;
     @JSONField(serialize = false)
-    private transient List<String> statusList;
+    private List<String> statusList;
     @EntityField(name = "来源", type = ApiParamType.INTEGER)
     private String source;
     @EntityField(name = "来源名", type = ApiParamType.INTEGER)
