@@ -820,14 +820,11 @@
         c.`version`,
         c.`status`,
         c.`lcu`,
-        d.`user_name` AS lcuName,
-        d.`user_info` AS lcuInfo,
         c.`lcd`,
         c.`size`
         FROM `knowledge_circle_user` a
         JOIN `knowledge_document` b ON b.`knowledge_circle_id` = a.`knowledge_circle_id` AND b.`is_delete` = 0
         JOIN `knowledge_document_version` c ON c.`knowledge_document_id` = b.`id` AND c.`status` = 'submitted'
-        LEFT JOIN `user` d ON d.`uuid` = c.`lcu`
         <include refid="getKnowledgeDocumentWaitingForReviewSql"/>
         ORDER BY c.`lcd` DESC
         <if test="basePageVo != null and basePageVo.needPage">
