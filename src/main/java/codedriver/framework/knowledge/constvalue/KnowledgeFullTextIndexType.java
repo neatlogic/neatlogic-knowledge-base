@@ -1,5 +1,5 @@
 /*
- * Copyright (c)  2021 TechSure Co.,Ltd.  All Rights Reserved.
+ * Copyright(c) 2021 TechSure Co., Ltd. All Rights Reserved.
  * 本内容仅限于深圳市赞悦科技有限公司内部传阅，禁止外泄以及用于其他的商业项目。
  */
 
@@ -8,7 +8,7 @@ package codedriver.framework.knowledge.constvalue;
 import codedriver.framework.fulltextindex.core.IFullTextIndexType;
 
 public enum KnowledgeFullTextIndexType implements IFullTextIndexType {
-    KNOW_DOCUMENT_VERSION("knows_document_version", "知识库版本");
+    KNOW_DOCUMENT_VERSION("knows_document_version", "知识库");
 
     private final String type;
     private final String typeName;
@@ -37,5 +37,11 @@ public enum KnowledgeFullTextIndexType implements IFullTextIndexType {
         }
         return "";
     }
+
+    @Override
+    public boolean isActiveGlobalSearch() {
+        return true;
+    }
+
 
 }
