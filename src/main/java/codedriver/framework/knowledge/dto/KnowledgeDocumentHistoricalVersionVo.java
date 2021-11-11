@@ -18,12 +18,6 @@ public class KnowledgeDocumentHistoricalVersionVo extends BaseEditorVo {
     private String versionName;
     @EntityField(name = "标题", type = ApiParamType.STRING)
     private String title;
-//    @EntityField(name = "修改者", type = ApiParamType.STRING)
-//    private String lcu;
-//    @EntityField(name = "修改者中文名", type = ApiParamType.STRING)
-//    private String lcuName;
-//    @EntityField(name = "修改日期", type = ApiParamType.STRING)
-//    private Date lcd;
     @EntityField(name = "是否可删除", type = ApiParamType.INTEGER)
     private Integer isDeletable;
     @EntityField(name = "是否可回退", type = ApiParamType.INTEGER)
@@ -58,24 +52,7 @@ public class KnowledgeDocumentHistoricalVersionVo extends BaseEditorVo {
     public void setTitle(String title) {
         this.title = title;
     }
-//    public String getLcu() {
-//        return lcu;
-//    }
-//    public void setLcu(String lcu) {
-//        this.lcu = lcu;
-//    }
-//    public String getLcuName() {
-//        return lcuName;
-//    }
-//    public void setLcuName(String lcuName) {
-//        this.lcuName = lcuName;
-//    }
-//    public Date getLcd() {
-//        return lcd;
-//    }
-//    public void setLcd(Date lcd) {
-//        this.lcd = lcd;
-//    }
+
     public Integer getIsDeletable() {
         return isDeletable;
     }
