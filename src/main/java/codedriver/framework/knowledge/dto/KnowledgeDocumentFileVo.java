@@ -12,6 +12,12 @@ public class KnowledgeDocumentFileVo {
         this.knowledgeDocumentId = knowledgeDocumentId;
         this.knowledgeDocumentVersionId = knowledgeDocumentVersionId;
     }
+
+    public KnowledgeDocumentFileVo(Long knowledgeDocumentId, Long knowledgeDocumentVersionId,Long fileId) {
+        this.knowledgeDocumentId = knowledgeDocumentId;
+        this.knowledgeDocumentVersionId = knowledgeDocumentVersionId;
+        this.fileId = fileId;
+    }
     public Long getKnowledgeDocumentId() {
         return knowledgeDocumentId;
     }
