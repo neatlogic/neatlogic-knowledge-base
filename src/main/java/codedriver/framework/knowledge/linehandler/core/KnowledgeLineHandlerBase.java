@@ -5,10 +5,11 @@
 
 package codedriver.framework.knowledge.linehandler.core;
 
-import codedriver.framework.knowledge.dto.KnowledgeDocumentLineVo;
+import codedriver.framework.lcs.BaseLineVo;
+import codedriver.framework.lcs.linehandler.core.ILineHandler;
 import org.jsoup.nodes.Element;
 
-public abstract class LineHandlerBase implements ILineHandler {
+public abstract class KnowledgeLineHandlerBase implements ILineHandler {
 
     /**
      * 将contend 转为 html
@@ -16,12 +17,11 @@ public abstract class LineHandlerBase implements ILineHandler {
      * @param line 行对象
      * @return html
      */
-    @Override
-    public String convertContentToHtml(KnowledgeDocumentLineVo line) {
+    public String convertContentToHtml(BaseLineVo line) {
         return myConvertContentToHtml(line);
     }
 
-    protected String myConvertContentToHtml(KnowledgeDocumentLineVo line) {
+    protected String myConvertContentToHtml(BaseLineVo line) {
         return "<" + this.getHandler() + ">"
                 + (line.getContent() != null ? line.getContent() : "")
                 + "</" + this.getHandler() + ">";
@@ -33,7 +33,6 @@ public abstract class LineHandlerBase implements ILineHandler {
      * @param element html
      * @return 知识内容
      */
-    @Override
     public String convertHtmlToContent(Element element) {
         return myConvertHtmlToContent(element);
     }
@@ -42,8 +41,6 @@ public abstract class LineHandlerBase implements ILineHandler {
         return element.html();
     }
 
-
-    @Override
     public String convertHtmlToConfig(Element element) {
         return myConvertHtmlToConfig(element);
     }
@@ -52,7 +49,6 @@ public abstract class LineHandlerBase implements ILineHandler {
         return null;
     }
 
-    @Override
     public String getRealHandler(Element element){
         return  myRealHandler(element);
     }
