@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="neatlogic.framework.knowledge.dao.mapper.KnowledgeTemplateMapper">
+
+	<select id="checkKnowledgeTemplateExistsById" parameterType="java.lang.Long" resultType="int">
+		SELECT COUNT(1) FROM `knowledge_template` WHERE `id` = #{id}
+	</select>
+
+	<select id="checkNameIsRepeat" parameterType="neatlogic.framework.knowledge.dto.KnowledgeTemplateVo" resultType="int">
+		SELECT COUNT(1) FROM `knowledge_template` WHERE `name` = #{name} AND `id` != #{id}
+	</select>
+
+	<select id="getKnowledgeTemplateById" parameterType="java.lang.Long" resultType="neatlogic.framework.knowledge.dto.KnowledgeTemplateVo">
+		SELECT
+		`id`,
+		`name`,
+		`content`,
+		`is_active` as isActive,
+		`fcu`,
+		`lcu`,
+		`fcd`,
+		`lcd`
+		 FROM `knowledge_template` WHERE `id` = #{id}
+	</select>
+
+	<select id="searchKnowledgeTemplateCount" parameterType="neatlogic.framework.knowledge.dto.KnowledgeTemplateVo" resultType="int">
+		SELECT
+		COUNT(1)
+		FROM
+		`knowledge_template`
+		<where>
+		<if test="keyword != null and keyword != ''">
+			and `name` LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="isActive != null">
+			and `is_active` = #{isActive}
+		</if>
+		</where>
+	</select>
+
+	<select id="searchKnowledgeTemplate" parameterType="neatlogic.framework.knowledge.dto.KnowledgeTemplateVo" resultType="neatlogic.framework.knowledge.dto.KnowledgeTemplateVo">
+		SELECT
+		`id`,
+		`name`,
+		`is_active` as isActive,
+		`fcu`,
+		`lcu`,
+		`fcd`,
+		`lcd`
+		FROM `knowledge_template`
+		<where>
+		<if test="keyword != null and keyword != ''">
+			and `name` LIKE CONCAT('%', #{keyword}, '%')
+		</if>
+		<if test="isActive != null">
+			and `is_active` = #{isActive}
+		</if>
+		</where>
+		ORDER BY `lcd` desc
+		<if test="needPage == true">
+			LIMIT #{startNum}, #{pageSize}
+		</if>
+	</select>
+
+	<update id="updateKnowledgeTemplate" parameterType="neatlogic.framework.knowledge.dto.KnowledgeTemplateVo">
+		UPDATE `knowledge_template` SET
+		 `name` = #{name},
+		 `content` = #{content},
+		 `lcu` = #{lcu},
+		 `lcd` = NOW(3)
+		 WHERE `id` = #{id}
+	</update>
+
+	<update id="updateActiveStatus">
+		UPDATE `knowledge_template` SET
+		 `is_active` = #{isActive}
+		 WHERE `id` = #{id}
+	</update>
+
+    <insert id="insertKnowledgeTemplate" parameterType="neatlogic.framework.knowledge.dto.KnowledgeTemplateVo">
+		insert into `knowledge_template`(
+		`id`,
+		`name`,
+		`content`,
+		`is_active`,
+		`fcu`,
+		`lcu`,
+		`fcd`,
+		`lcd`
+		)
+		values(
+		#{id},
+		#{name},
+		#{content},
+		#{isActive},
+		#{fcu},
+		#{lcu},
+		now(3),
+		now(3)
+		)
+    </insert>
+	<delete id="deleteKnowledgeTemplate" parameterType="java.lang.Long">
+		delete from knowledge_template where `id` = #{id}
+	</delete>
+
+</mapper>
