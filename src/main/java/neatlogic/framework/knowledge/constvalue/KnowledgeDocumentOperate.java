@@ -1,11 +1,13 @@
 package neatlogic.framework.knowledge.constvalue;
 
+import neatlogic.framework.util.I18nUtils;
+
 public enum KnowledgeDocumentOperate {
-    SUBMIT("submit", "提交", "提交了审核", false),
-    PASS("pass", "通过", "通过了审核", false),
-    REJECT("reject", "拒绝", "退回了审核", false),
-    SWITCHVERSION("switchversion", "切换版本", "切换【版本${DATA.oldVersion}】至【版本${DATA.newVersion}】", true),
-    DELETEVERSION("deleteversion", "删除版本", "删除【版本${DATA.version}】", true);
+    SUBMIT("submit", "enum.knowledge.knowledgedocumentoperate.submit", "enum.knowledge.knowledgedocumentoperate.submit.1", false),
+    PASS("pass", "enum.knowledge.knowledgedocumentoperate.pass", "enum.knowledge.knowledgedocumentoperate.pass.1", false),
+    REJECT("reject", "enum.knowledge.knowledgedocumentoperate.reject", "enum.knowledge.knowledgedocumentoperate.reject.1", false),
+    SWITCHVERSION("switchversion", "enum.knowledge.knowledgedocumentoperate.switchversion", "enum.knowledge.knowledgedocumentoperate.switchversion.1", true),
+    DELETEVERSION("deleteversion", "enum.knowledge.knowledgedocumentoperate.deleteversion", "enum.knowledge.knowledgedocumentoperate.deleteversion.1", true);
     private String value;
     private String text;
     private String title;
@@ -20,10 +22,10 @@ public enum KnowledgeDocumentOperate {
         return value;
     }
     public String getText() {
-        return text;
+        return I18nUtils.getMessage(text);
     }
     public String getTitle() {
-        return title;
+        return I18nUtils.getMessage(title);
     }
     public boolean isNeedReplaceParam() {
         return needReplaceParam;

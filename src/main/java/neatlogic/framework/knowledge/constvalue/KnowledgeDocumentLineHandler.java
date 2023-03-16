@@ -1,22 +1,23 @@
 package neatlogic.framework.knowledge.constvalue;
 
 import neatlogic.framework.knowledge.dto.KnowledgeDocumentLineVo;
+import neatlogic.framework.util.I18nUtils;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 public enum KnowledgeDocumentLineHandler {
 
-    P("p", "段落", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    H1("h1", "一级标题", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    H2("h2", "二级标题", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    IMG("img", "图片", (line) -> line.getConfig().getString("url"), null),
-    TABLE("table", "表格", (line) -> line.getConfig().getString("tableList"), null),
-    CODE("code", "代码块", (line) -> line.getConfig().getString("value"), null),
-    FORMTABLE("formtable", "表单", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    EDITOR("editor", "编辑器", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    UL("ul", "无序列表", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    OL("ol", "有序列表", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody))
+    P("p", "enum.knowledge.knowledgedocumentlinehandler.p", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    H1("h1", "enum.knowledge.knowledgedocumentlinehandler.h1", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    H2("h2", "enum.knowledge.knowledgedocumentlinehandler.h2", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    IMG("img", "enum.knowledge.knowledgedocumentlinehandler.img", (line) -> line.getConfig().getString("url"), null),
+    TABLE("table", "enum.knowledge.knowledgedocumentlinehandler.table", (line) -> line.getConfig().getString("tableList"), null),
+    CODE("code", "enum.knowledge.knowledgedocumentlinehandler.code", (line) -> line.getConfig().getString("value"), null),
+    FORMTABLE("formtable", "enum.knowledge.knowledgedocumentlinehandler.formtable", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    EDITOR("editor", "enum.knowledge.knowledgedocumentlinehandler.editor", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    UL("ul", "enum.knowledge.knowledgedocumentlinehandler.ul", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    OL("ol", "enum.knowledge.knowledgedocumentlinehandler.ol", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody))
     ;
     private String value;
     private String text;
@@ -32,9 +33,9 @@ public enum KnowledgeDocumentLineHandler {
         return value;
     }
 
-//    public String getText() {
-//        return text;
-//    }
+    public String getText() {
+        return I18nUtils.getMessage(text);
+    }
 
 //    public static BiConsumer<KnowledgeDocumentLineVo, String> getMainBodySet(String _value){
 //        for(KnowledgeDocumentLineHandler handler : values()) {

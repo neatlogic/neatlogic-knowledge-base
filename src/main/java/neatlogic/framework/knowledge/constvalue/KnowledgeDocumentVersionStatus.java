@@ -1,12 +1,14 @@
 package neatlogic.framework.knowledge.constvalue;
 
+import neatlogic.framework.util.I18nUtils;
+
 public enum KnowledgeDocumentVersionStatus {
-    ALL("all","全部",""),
-    DRAFT("draft", "未提交",""),
-    SUBMITTED("submitted", "待审批","#F59A23"),
-    PASSED("passed", "已通过","#00BCD4"),
+    ALL("all","enum.knowledge.knowledgedocumentversionstatus.all",""),
+    DRAFT("draft", "enum.knowledge.knowledgedocumentversionstatus.draft",""),
+    SUBMITTED("submitted", "enum.knowledge.knowledgedocumentversionstatus.submitted","#F59A23"),
+    PASSED("passed", "enum.knowledge.knowledgedocumentversionstatus.passed","#00BCD4"),
 //    EXPIRED("expired", "已失效"),
-    REJECTED("rejected", "不通过","#D9001B");
+    REJECTED("rejected", "enum.knowledge.knowledgedocumentversionstatus.rejected","#D9001B");
     private String value;
     private String text;
     private String color;
@@ -20,7 +22,7 @@ public enum KnowledgeDocumentVersionStatus {
     }
 
     public String getText() {
-        return text;
+        return I18nUtils.getMessage(text);
     }
 
     public String getColor() {
