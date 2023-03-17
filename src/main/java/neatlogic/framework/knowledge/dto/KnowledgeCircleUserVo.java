@@ -2,11 +2,12 @@ package neatlogic.framework.knowledge.dto;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.I18nUtils;
 
 public class KnowledgeCircleUserVo{
 
 	public enum AuthType {
-		APPROVER("approver", "审批人"), MEMBER("member", "成员");
+		APPROVER("approver", "enum.knowledge.authtype.approver"), MEMBER("member", "enum.knowledge.authtype.member");
 
 		private String name;
 		private String text;
@@ -21,7 +22,7 @@ public class KnowledgeCircleUserVo{
 		}
 
 		public String getText() {
-			return text;
+			return I18nUtils.getMessage(text);
 		}
 
 		public static String getText(String name) {
