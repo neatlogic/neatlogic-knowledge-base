@@ -3,11 +3,11 @@ package neatlogic.framework.knowledge.constvalue;
 import neatlogic.framework.util.I18nUtils;
 
 public enum KnowledgeType {
-    ALL("all", "enum.knowledge.knowledgetype.all"),
+    ALL("all", "common.all"),
     WAITINGFORREVIEW("waitingforreview", "enum.knowledge.knowledgetype.waitingforreview"),
     SHARE("share", "enum.knowledge.knowledgetype.share"),
     COLLECT("collect", "enum.knowledge.knowledgetype.collect"),
-    DRAFT("draft", "enum.knowledge.knowledgetype.draft");
+    DRAFT("draft", "common.draft");
     private String value;
     private String text;
     private KnowledgeType(String value, String text) {

@@ -20,7 +20,7 @@ import neatlogic.framework.fulltextindex.core.IFullTextIndexType;
 import neatlogic.framework.util.I18nUtils;
 
 public enum KnowledgeFullTextIndexType implements IFullTextIndexType {
-    KNOW_DOCUMENT_VERSION("knows_document_version", "enum.knowledge.knowledgefulltextindextype.know_document_version");
+    KNOW_DOCUMENT_VERSION("knows_document_version", "common.knowledgebase");
 
     private final String type;
     private final String typeName;

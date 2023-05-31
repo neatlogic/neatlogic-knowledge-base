@@ -12,9 +12,9 @@ public enum KnowledgeDocumentLineHandler {
     H1("h1", "enum.knowledge.knowledgedocumentlinehandler.h1", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
     H2("h2", "enum.knowledge.knowledgedocumentlinehandler.h2", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
     IMG("img", "enum.knowledge.knowledgedocumentlinehandler.img", (line) -> line.getConfig().getString("url"), null),
-    TABLE("table", "enum.knowledge.knowledgedocumentlinehandler.table", (line) -> line.getConfig().getString("tableList"), null),
+    TABLE("table", "common.table", (line) -> line.getConfig().getString("tableList"), null),
     CODE("code", "enum.knowledge.knowledgedocumentlinehandler.code", (line) -> line.getConfig().getString("value"), null),
-    FORMTABLE("formtable", "enum.knowledge.knowledgedocumentlinehandler.formtable", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    FORMTABLE("formtable", "common.form", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
     EDITOR("editor", "enum.knowledge.knowledgedocumentlinehandler.editor", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
     UL("ul", "enum.knowledge.knowledgedocumentlinehandler.ul", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
     OL("ol", "enum.knowledge.knowledgedocumentlinehandler.ol", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody))

@@ -4,9 +4,9 @@ import neatlogic.framework.util.I18nUtils;
 
 public enum KnowledgeDocumentVersionStatus {
     ALL("all","enum.knowledge.knowledgedocumentversionstatus.all",""),
-    DRAFT("draft", "enum.knowledge.knowledgedocumentversionstatus.draft",""),
+    DRAFT("draft", "common.draftdesc",""),
     SUBMITTED("submitted", "enum.knowledge.knowledgedocumentversionstatus.submitted","#F59A23"),
-    PASSED("passed", "enum.knowledge.knowledgedocumentversionstatus.passed","#00BCD4"),
+    PASSED("passed", "common.passed","#00BCD4"),
 //    EXPIRED("expired", "已失效"),
     REJECTED("rejected", "enum.knowledge.knowledgedocumentversionstatus.rejected","#D9001B");
     private String value;
