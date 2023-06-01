@@ -7,7 +7,7 @@ import neatlogic.framework.util.I18nUtils;
 public class KnowledgeCircleUserVo{
 
 	public enum AuthType {
-		APPROVER("approver", "enum.knowledge.authtype.approver"), MEMBER("member", "enum.knowledge.authtype.member");
+		APPROVER("approver", "审批人"), MEMBER("member", "成员");
 
 		private String name;
 		private String text;

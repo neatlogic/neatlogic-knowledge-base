@@ -7,6 +7,6 @@ public class KnowledgeDocumentDraftUnsubmittedCannotBeReviewedException extends 
     private static final long serialVersionUID = -8320690753297472640L;
 
     public KnowledgeDocumentDraftUnsubmittedCannotBeReviewedException() {
-        super("exception.knowledge.knowledgedocumentdraftunsubmittedcannotbereviewedexception");
+        super("该文档草稿未提交，不能审核");
     }
 }

@@ -7,6 +7,6 @@ public class KnowledgeDocumentCurrentUserNotOwnerException extends ApiRuntimeExc
     private static final long serialVersionUID = 3870135806607487845L;
 
     public KnowledgeDocumentCurrentUserNotOwnerException() {
-        super("exception.knowledge.knowledgedocumentcurrentusernotownerexception");
+        super("当前用户不是该草稿的所有者，无权限执行此操作");
     }
 }

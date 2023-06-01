@@ -7,6 +7,6 @@ public class KnowledgeDocumentTitleRepeatException extends ApiRuntimeException {
     private static final long serialVersionUID = -4997134182698313408L;
 
     public KnowledgeDocumentTitleRepeatException(String title) {
-        super("exception.knowledge.knowledgedocumenttitlerepeatexception", title);
+        super("知识标题：“{0}”已存在", title);
     }
 }

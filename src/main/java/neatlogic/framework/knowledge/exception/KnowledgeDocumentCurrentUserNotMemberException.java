@@ -7,6 +7,6 @@ public class KnowledgeDocumentCurrentUserNotMemberException extends ApiRuntimeEx
     private static final long serialVersionUID = -2647202188708812513L;
 
     public KnowledgeDocumentCurrentUserNotMemberException() {
-        super("exception.knowledge.knowledgedocumentcurrentusernotmemberexception");
+        super("当前用户不是成员，无权限执行此操作");
     }
 }

@@ -7,6 +7,6 @@ public class KnowledgeDocumentHasBeenDeletedException extends ApiRuntimeExceptio
     private static final long serialVersionUID = -5791042284219697759L;
 
     public KnowledgeDocumentHasBeenDeletedException(Long id) {
-        super("exception.knowledge.knowledgedocumenthasbeendeletedexception", id);
+        super("文档：“{0}”已被删除", id);
     }
 }

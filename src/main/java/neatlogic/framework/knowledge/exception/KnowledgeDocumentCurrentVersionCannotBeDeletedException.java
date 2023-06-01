@@ -7,6 +7,6 @@ public class KnowledgeDocumentCurrentVersionCannotBeDeletedException extends Api
     private static final long serialVersionUID = 1035159337589949165L;
 
     public KnowledgeDocumentCurrentVersionCannotBeDeletedException() {
-        super("exception.knowledge.knowledgedocumentcurrentversioncannotbedeletedexception");
+        super("文档当前版本不允许删除");
     }
 }

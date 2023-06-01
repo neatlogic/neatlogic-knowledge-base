@@ -7,6 +7,6 @@ public class KnowledgeDocumentUnmodifiedCannotBeSavedException extends ApiRuntim
     private static final long serialVersionUID = 505929515870442177L;
 
     public KnowledgeDocumentUnmodifiedCannotBeSavedException(){
-        super("exception.knowledge.knowledgedocumentunmodifiedcannotbesavedexception");
+        super("文档未经修改");
     }
 }

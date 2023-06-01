@@ -7,6 +7,6 @@ public class KnowledgeDocumentDraftExpiredCannotSubmitException extends ApiRunti
     private static final long serialVersionUID = 984692472481791872L;
 
     public KnowledgeDocumentDraftExpiredCannotSubmitException(Long id) {
-        super("exception.knowledge.knowledgedocumentdraftexpiredcannotsubmitexception", id);
+        super("文档草稿：“{0}”已过期不能提交", id);
     }
 }

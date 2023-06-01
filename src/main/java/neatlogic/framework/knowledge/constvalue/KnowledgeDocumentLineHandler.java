@@ -8,16 +8,16 @@ import java.util.function.Function;
 
 public enum KnowledgeDocumentLineHandler {
 
-    P("p", "enum.knowledge.knowledgedocumentlinehandler.p", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    H1("h1", "enum.knowledge.knowledgedocumentlinehandler.h1", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    H2("h2", "enum.knowledge.knowledgedocumentlinehandler.h2", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    IMG("img", "enum.knowledge.knowledgedocumentlinehandler.img", (line) -> line.getConfig().getString("url"), null),
-    TABLE("table", "common.table", (line) -> line.getConfig().getString("tableList"), null),
-    CODE("code", "enum.knowledge.knowledgedocumentlinehandler.code", (line) -> line.getConfig().getString("value"), null),
-    FORMTABLE("formtable", "common.form", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    EDITOR("editor", "enum.knowledge.knowledgedocumentlinehandler.editor", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    UL("ul", "enum.knowledge.knowledgedocumentlinehandler.ul", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
-    OL("ol", "enum.knowledge.knowledgedocumentlinehandler.ol", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody))
+    P("p", "段落", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    H1("h1", "一级标题", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    H2("h2", "二级标题", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    IMG("img", "图片", (line) -> line.getConfig().getString("url"), null),
+    TABLE("table", "表格", (line) -> line.getConfig().getString("tableList"), null),
+    CODE("code", "代码块", (line) -> line.getConfig().getString("value"), null),
+    FORMTABLE("formtable", "表单", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    EDITOR("editor", "编辑器", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    UL("ul", "无序列表", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody)),
+    OL("ol", "有序列表", (line) -> line.getContent(), (line, mainBody) -> line.setContent(mainBody))
     ;
     private String value;
     private String text;

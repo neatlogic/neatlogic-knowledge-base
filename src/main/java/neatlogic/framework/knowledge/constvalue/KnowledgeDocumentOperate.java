@@ -3,11 +3,11 @@ package neatlogic.framework.knowledge.constvalue;
 import neatlogic.framework.util.I18nUtils;
 
 public enum KnowledgeDocumentOperate {
-    SUBMIT("submit", "common.submit", "enum.knowledge.knowledgedocumentoperate.submit.b", false),
-    PASS("pass", "common.passe", "enum.knowledge.knowledgedocumentoperate.pass.b", false),
-    REJECT("reject", "enum.knowledge.knowledgedocumentoperate.reject.a", "enum.knowledge.knowledgedocumentoperate.reject.b", false),
-    SWITCHVERSION("switchversion", "common.switchversion", "enum.knowledge.knowledgedocumentoperate.switchversion.b", true),
-    DELETEVERSION("deleteversion", "common.deleteversion", "enum.knowledge.knowledgedocumentoperate.deleteversion.b", true);
+    SUBMIT("submit", "提交", "提交了审核", false),
+    PASS("pass", "通过", "通过了审核", false),
+    REJECT("reject", "拒绝", "退回了审核", false),
+    SWITCHVERSION("switchversion", "切换版本", "切换【版本${DATA.oldVersion}】至【版本${DATA.newVersion}】", true),
+    DELETEVERSION("deleteversion", "删除版本", "删除【版本${DATA.version}】", true);
     private String value;
     private String text;
     private String title;

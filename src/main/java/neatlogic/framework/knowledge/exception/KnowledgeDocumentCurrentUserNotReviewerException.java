@@ -7,6 +7,6 @@ public class KnowledgeDocumentCurrentUserNotReviewerException extends ApiRuntime
     private static final long serialVersionUID = -4045126943871911846L;
 
     public KnowledgeDocumentCurrentUserNotReviewerException() {
-        super("exception.knowledge.knowledgedocumentcurrentusernotreviewerexception");
+        super("当前用户不是审核人，无权限执行此操作");
     }
 }

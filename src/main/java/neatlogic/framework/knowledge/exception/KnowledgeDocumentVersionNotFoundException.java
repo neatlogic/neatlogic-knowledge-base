@@ -7,6 +7,6 @@ public class KnowledgeDocumentVersionNotFoundException extends ApiRuntimeExcepti
     private static final long serialVersionUID = 8975582712748692017L;
 
     public KnowledgeDocumentVersionNotFoundException(Long id) {
-        super("exception.knowledge.knowledgedocumentversionnotfoundexception", id);
+        super("知识库文档版本：“{0}”不存在", id);
     }
 }
