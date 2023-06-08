@@ -17,7 +17,7 @@
 package neatlogic.framework.knowledge.constvalue;
 
 import neatlogic.framework.fulltextindex.core.IFullTextIndexType;
-import neatlogic.framework.util.I18nUtils;
+import neatlogic.framework.util.$;
 
 public enum KnowledgeFullTextIndexType implements IFullTextIndexType {
     KNOW_DOCUMENT_VERSION("knows_document_version", "知识库");
@@ -37,7 +37,7 @@ public enum KnowledgeFullTextIndexType implements IFullTextIndexType {
 
     @Override
     public String getTypeName() {
-        return I18nUtils.getMessage(typeName);
+        return $.t(typeName);
     }
 
     @Override

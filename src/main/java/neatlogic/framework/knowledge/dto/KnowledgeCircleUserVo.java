@@ -2,7 +2,7 @@ package neatlogic.framework.knowledge.dto;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.restful.annotation.EntityField;
-import neatlogic.framework.util.I18nUtils;
+import neatlogic.framework.util.$;
 
 public class KnowledgeCircleUserVo{
 
@@ -22,7 +22,7 @@ public class KnowledgeCircleUserVo{
 		}
 
 		public String getText() {
-			return I18nUtils.getMessage(text);
+			return $.t(text);
 		}
 
 		public static String getText(String name) {

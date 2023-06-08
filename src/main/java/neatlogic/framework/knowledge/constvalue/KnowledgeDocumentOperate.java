@@ -1,6 +1,6 @@
 package neatlogic.framework.knowledge.constvalue;
 
-import neatlogic.framework.util.I18nUtils;
+import neatlogic.framework.util.$;
 
 public enum KnowledgeDocumentOperate {
     SUBMIT("submit", "提交", "提交了审核", false),
@@ -22,10 +22,10 @@ public enum KnowledgeDocumentOperate {
         return value;
     }
     public String getText() {
-        return I18nUtils.getMessage(text);
+        return $.t(text);
     }
     public String getTitle() {
-        return I18nUtils.getMessage(title);
+        return $.t(title);
     }
     public boolean isNeedReplaceParam() {
         return needReplaceParam;

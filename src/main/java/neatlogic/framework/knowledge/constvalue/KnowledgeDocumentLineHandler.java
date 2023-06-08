@@ -1,7 +1,7 @@
 package neatlogic.framework.knowledge.constvalue;
 
 import neatlogic.framework.knowledge.dto.KnowledgeDocumentLineVo;
-import neatlogic.framework.util.I18nUtils;
+import neatlogic.framework.util.$;
 
 import java.util.function.BiConsumer;
 import java.util.function.Function;
@@ -34,7 +34,7 @@ public enum KnowledgeDocumentLineHandler {
     }
 
     public String getText() {
-        return I18nUtils.getMessage(text);
+        return $.t(text);
     }
 
 //    public static BiConsumer<KnowledgeDocumentLineVo, String> getMainBodySet(String _value){
