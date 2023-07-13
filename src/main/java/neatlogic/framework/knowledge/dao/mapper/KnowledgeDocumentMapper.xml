@@ -489,8 +489,8 @@
     </sql>
 
     <sql id="circleUserSql">
-        and (
-        (kcu.type = "user" and kcu.uuid = #{circleUserUuid})
+        and ((kcu.`type` = 'common' and kcu.`uuid` = 'alluser')
+        OR (kcu.type = "user" and kcu.uuid = #{circleUserUuid})
         <if test="circleTeamUuidList != null and circleTeamUuidList.size()>0">
             or
             (
