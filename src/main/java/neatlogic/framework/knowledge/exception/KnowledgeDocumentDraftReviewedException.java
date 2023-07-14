@@ -7,6 +7,6 @@ public class KnowledgeDocumentDraftReviewedException extends ApiRuntimeException
     private static final long serialVersionUID = 8651017043019488660L;
 
     public KnowledgeDocumentDraftReviewedException() {
-        super("xception.knowledge.knowledgedocumentdraftreviewedexception");
+        super("nfke.knowledgedocumentdraftreviewedexception.knowledgedocumentdraftreviewedexception");
     }
 }
