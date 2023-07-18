@@ -1225,6 +1225,24 @@
           AND `is_delete` = 0
     </select>
 
+    <select id="getKnowledgeDocumentVersionListByKnowledgeDocumentId" parameterType="java.lang.Long" resultType="neatlogic.framework.knowledge.dto.KnowledgeDocumentVersionVo">
+        SELECT `id`,
+               `title`,
+               `knowledge_document_type_uuid` AS knowledgeDocumentTypeUuid,
+               `knowledge_document_id`        AS knowledgeDocumentId,
+               `from_version`                 AS fromVersion,
+               `version`,
+               `status`,
+               `lcu`,
+               `lcd`,
+               `size`,
+               `reviewer`,
+               `review_time`                  AS reviewTime,
+               `is_delete`                  AS isDelete
+        FROM `knowledge_document_version`
+        WHERE `knowledge_document_id` = #{value}
+    </select>
+
     <insert id="insertKnowledgeDocument" parameterType="neatlogic.framework.knowledge.dto.KnowledgeDocumentVo">
         INSERT INTO `knowledge_document` (`id`,
                                           `title`,

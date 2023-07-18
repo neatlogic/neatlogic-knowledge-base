@@ -149,6 +149,8 @@ public interface KnowledgeDocumentMapper {
 
     public int checkKnowledgeDocumentTitleIsRepeat(KnowledgeDocumentVo documentVo);
 
+    List<KnowledgeDocumentVersionVo> getKnowledgeDocumentVersionListByKnowledgeDocumentId(Long knowledgeDocumentId);
+
     public int insertKnowledgeDocument(KnowledgeDocumentVo knowledgeDocumentVo);
 
     public int insertKnowledgeDocumentVersion(KnowledgeDocumentVersionVo knowledgeDocumentVersionVo);
