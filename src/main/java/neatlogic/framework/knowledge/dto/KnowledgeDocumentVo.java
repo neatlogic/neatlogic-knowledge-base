@@ -1,18 +1,17 @@
 package neatlogic.framework.knowledge.dto;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.annotation.JSONField;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.constvalue.GroupSearch;
 import neatlogic.framework.common.dto.BaseEditorVo;
 import neatlogic.framework.dto.WorkAssignmentUnitVo;
 import neatlogic.framework.file.dto.FileVo;
-import neatlogic.framework.knowledge.dto.SyncSourceVo;
 import neatlogic.framework.knowledge.source.SyncSourceFactory;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import neatlogic.framework.util.TimeUtil;
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import com.alibaba.fastjson.annotation.JSONField;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -117,6 +116,8 @@ public class KnowledgeDocumentVo extends BaseEditorVo {
     private List<String> circleTeamUuidList;
     @JSONField(serialize=false)
     private List<String> circleRoleUuidList;
+    @JSONField(serialize=false)
+    private List<String> knowledgeDocumentTypeUuidList;
 
     public KnowledgeDocumentVo() {}
 
@@ -464,5 +465,13 @@ public class KnowledgeDocumentVo extends BaseEditorVo {
 
     public void setIsMember(Integer isMember) {
         this.isMember = isMember;
+    }
+
+    public List<String> getKnowledgeDocumentTypeUuidList() {
+        return knowledgeDocumentTypeUuidList;
+    }
+
+    public void setKnowledgeDocumentTypeUuidList(List<String> knowledgeDocumentTypeUuidList) {
+        this.knowledgeDocumentTypeUuidList = knowledgeDocumentTypeUuidList;
     }
 }
