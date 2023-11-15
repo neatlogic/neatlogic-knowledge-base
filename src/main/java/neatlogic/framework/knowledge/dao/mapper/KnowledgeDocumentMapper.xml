@@ -469,19 +469,59 @@
                 #{source}
             </foreach>
         </if>
-        <if test="knowledgeDocumentTypeUuid != null and knowledgeDocumentTypeUuid != ''">
-            and kd.`knowledge_document_type_uuid` in (
-            SELECT `uuid` FROM `knowledge_document_type` WHERE
-            `lft` >= (
-            SELECT `lft` FROM `knowledge_document_type` WHERE `uuid` = #{knowledgeDocumentTypeUuid}
-            )
-            AND
-            `rht` &lt;= (
-            SELECT `rht` FROM `knowledge_document_type` WHERE `uuid` = #{knowledgeDocumentTypeUuid}
-            )
-            )
-            AND kc.`id` = (SELECT knowledge_circle_id FROM `knowledge_document_type` WHERE `uuid` =
-            #{knowledgeDocumentTypeUuid})
+        <if test="knowledgeDocumentTypeUuidList != null and knowledgeDocumentTypeUuidList.size() > 0">
+            and kd.`knowledge_document_type_uuid` in
+            <foreach collection="knowledgeDocumentTypeUuidList" item="knowledgeDocumentTypeUuid" open="(" separator="," close=")">
+                #{knowledgeDocumentTypeUuid}
+            </foreach>
+        </if>
+        <if test="knowledgeCircleId != null">
+            AND kc.`id` = #{knowledgeCircleId}
+        </if>
+        <if test="collector != null and collector != ''">
+            and kdc.`user_uuid` = #{collector}
+        </if>
+    </sql>
+
+    <sql id="searchDocumentSql" databaseId="tidb">
+        <if test="lcuList != null and lcuList.size()>0 ">
+            and kdv.`lcu` in
+            <foreach collection="lcuList" item="lcu" open="(" separator="," close=")">
+                #{lcu}
+            </foreach>
+        </if>
+        <if test="lcdStartTime != null and  lcdStartTime != ''">
+            and kdv.`lcd` >= #{lcdStartTime}
+        </if>
+        <if test="lcdEndTime != null and  lcdEndTime != ''">
+            and kdv.`lcd` &lt;= #{lcdEndTime}
+        </if>
+        <if test="tagList != null and tagList.size()>0">
+            and ktg.`name` in
+            <foreach collection="tagList" item="tag" open="(" separator="," close=")">
+                #{tag}
+            </foreach>
+        </if>
+        <if test="statusList != null and statusList.size()>0">
+            and kdv.`status` in
+            <foreach collection="statusList" item="status" open="(" separator="," close=")">
+                #{status}
+            </foreach>
+        </if>
+        <if test="sourceList != null and sourceList.size()>0">
+            and kd.`source` in
+            <foreach collection="sourceList" item="source" open="(" separator="," close=")">
+                #{source}
+            </foreach>
+        </if>
+        <if test="knowledgeDocumentTypeUuidList != null and knowledgeDocumentTypeUuidList.size() > 0">
+            and kd.`knowledge_document_type_uuid` in 
+            <foreach collection="knowledgeDocumentTypeUuidList" item="knowledgeDocumentTypeUuid" open="(" separator="," close=")">
+                #{knowledgeDocumentTypeUuid}
+            </foreach>
+        </if>
+        <if test="knowledgeCircleId != null">
+            AND kc.`id` = #{knowledgeCircleId}
         </if>
         <if test="collector != null and collector != ''">
             and kdc.`user_uuid` = #{collector}
@@ -515,7 +555,7 @@
     <select id="searchKnowledgeDocumentId" parameterType="neatlogic.framework.knowledge.dto.KnowledgeDocumentVo"
             resultType="java.lang.Long">
         SELECT
-        DISTINCT kd.id
+        kd.id
         FROM `knowledge_document` kd
         JOIN `knowledge_document_version` kdv ON kd.`id` = kdv.`knowledge_document_id` AND
         kd.`knowledge_document_version_id` = kdv.`id`
@@ -531,6 +571,41 @@
         <include refid="circleUserSql"/>
         GROUP BY kd.id
         order by kdv.lcd desc
+        <if test="needPage">
+            limit #{startNum}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="searchKnowledgeDocumentId" databaseId="tidb" parameterType="neatlogic.framework.knowledge.dto.KnowledgeDocumentVo"
+            resultType="java.lang.Long">
+        SELECT a.id FROM `knowledge_document` a
+        JOIN `knowledge_document_version` b ON a.`id` = b.`knowledge_document_id` AND a.`knowledge_document_version_id` = b.`id`
+        JOIN (
+            SELECT
+            DISTINCT kd.id
+            FROM `knowledge_document` kd
+            JOIN `knowledge_document_version` kdv ON kd.`id` = kdv.`knowledge_document_id` AND
+            kd.`knowledge_document_version_id` = kdv.`id`
+            <if test="keywordList != null and keywordList.size() > 0">
+                JOIN fulltextindex_field_knowledge ff on ff.`target_id` = kdv.id
+                join `fulltextindex_word` fw on fw.id = ff.`word_id`
+                AND fw.word IN
+                <foreach collection="keywordList" item="k" open="("
+                         separator="," close=")">#{k}
+                </foreach>
+            </if>
+            LEFT JOIN `knowledge_circle` kc ON kd.`knowledge_circle_id` = kc.`id`
+            LEFT JOIN `knowledge_document_tag` kdt ON kdt.`knowledge_document_id` = kdv.`knowledge_document_id` AND
+            kdt.`knowledge_document_version_id` = kdv.`id`
+            LEFT JOIN `knowledge_tag` ktg ON kdt.`tag_id` = ktg.`id`
+            LEFT JOIN `knowledge_document_collect` kdc ON kd.id = kdc.`knowledge_document_id`
+            LEFT JOIN `knowledge_circle_user` kcu ON kcu.`knowledge_circle_id` = kd.`knowledge_circle_id`
+            where
+            kd.`is_delete` = 0 AND kdv.`is_delete` = 0
+            <include refid="searchDocumentSql"/>
+            <include refid="circleUserSql"/>
+        ) c ON c.id = a.`id`
+        order by b.lcd desc
         <if test="needPage">
             limit #{startNum}, #{pageSize}
         </if>
