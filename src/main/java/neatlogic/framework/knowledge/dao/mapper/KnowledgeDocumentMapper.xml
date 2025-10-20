@@ -1381,7 +1381,7 @@
             IGNORE
         INTO `knowledge_document_line_config` (`hash`, `config`)
         VALUES (#{hash},
-                #{config})
+                #{config, typeHandler=CompressHandler})
     </insert>
 
     <insert id="insertKnowledgeDocumentLineContent"

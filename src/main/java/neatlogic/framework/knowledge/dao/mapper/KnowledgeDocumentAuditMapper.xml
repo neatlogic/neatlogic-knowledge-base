@@ -88,7 +88,7 @@
     <insert id="insertKnowledgeDocumentAuditDetail"
             parameterType="neatlogic.framework.knowledge.dto.KnowledgeDocumentAuditDetailVo">
         INSERT IGNORE INTO `knowledge_document_audit_detail` (`hash`, `config`)
-        VALUES (#{hash}, #{config})
+        VALUES (#{hash}, #{config, typeHandler=CompressHandler})
     </insert>
 
 </mapper>

@@ -65,7 +65,7 @@
 	<update id="updateKnowledgeTemplate" parameterType="neatlogic.framework.knowledge.dto.KnowledgeTemplateVo">
 		UPDATE `knowledge_template` SET
 		 `name` = #{name},
-		 `content` = #{content},
+		 `content` = #{content, typeHandler=CompressHandler},
 		 `lcu` = #{lcu},
 		 `lcd` = NOW(3)
 		 WHERE `id` = #{id}
@@ -91,7 +91,7 @@
 		values(
 		#{id},
 		#{name},
-		#{content},
+		#{content, typeHandler=CompressHandler},
 		#{isActive},
 		#{fcu},
 		#{lcu},
