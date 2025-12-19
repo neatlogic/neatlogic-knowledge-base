@@ -680,6 +680,13 @@
         FROM `knowledge_document_version`
     </select>
 
+    <select id="getKnowledgeDocumentVersionIdListForFulltextIndex" resultType="java.lang.Long">
+        SELECT id
+        FROM `knowledge_document_version`
+        ORDER BY id
+        limit #{startNum}, #{pageSize}
+    </select>
+
     <select id="getKnowledgeDocumentVersionIdListByLcd" resultType="java.lang.Long">
         SELECT id FROM `knowledge_document_version`
         <where>
