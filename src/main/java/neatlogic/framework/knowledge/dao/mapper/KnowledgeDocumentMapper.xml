@@ -851,6 +851,14 @@
           AND `knowledge_document_version_id` = #{knowledgeDocumentVersionId}
     </select>
 
+    <select id="checkKnowledgeDocumentFileIdIsExistsByFileId"
+            parameterType="java.lang.Long" resultType="java.lang.Long">
+        SELECT `file_id`
+        FROM `knowledge_document_file`
+        WHERE `file_id` = #{value}
+          LIMIT 1
+    </select>
+
     <select id="getKnowledgeDocumentTagIdListByKnowledgeDocumentIdAndVersionId"
             parameterType="neatlogic.framework.knowledge.dto.KnowledgeDocumentTagVo" resultType="java.lang.Long">
         SELECT `tag_id`
