@@ -60,6 +60,8 @@ public interface KnowledgeDocumentMapper {
 
     List<Long> getKnowledgeDocumentFileIdListByKnowledgeDocumentIdAndVersionId(KnowledgeDocumentFileVo knowledgeDocumentFileVo);
 
+    Long checkKnowledgeDocumentFileIdIsExistsByFileId(Long fileId);
+
     List<Long> getKnowledgeDocumentTagIdListByKnowledgeDocumentIdAndVersionId(KnowledgeDocumentTagVo knowledgeDocumentTagVo);
 
     Integer getKnowledgeDocumentVersionMaxVerionByKnowledgeDocumentId(Long knowledgeDocumentId);
