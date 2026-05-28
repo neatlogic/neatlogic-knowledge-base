@@ -1504,6 +1504,7 @@
         UPDATE `knowledge_document`
         SET `knowledge_document_version_id` = #{knowledgeDocumentVersionId},
             `version`                       = #{version},
+            `title`                         = #{title},
             `is_delete`                     = 0
         WHERE `id` = #{id}
     </update>
