@@ -77,7 +77,12 @@ public class KnowledgeFeishuSyncAuditVo extends BasePageVo {
         this.detail = detail;
         this.detailStr = detail == null ? null : detail.toJSONString();
     }
-    public String getDetailStr() { return detailStr; }
+    public String getDetailStr() {
+        if (detailStr == null && detail != null) {
+            detailStr = detail.toJSONString();
+        }
+        return detailStr;
+    }
     public void setDetailStr(String detailStr) { this.detailStr = detailStr; }
     public String getFcu() { return fcu; }
     public void setFcu(String fcu) { this.fcu = fcu; }
