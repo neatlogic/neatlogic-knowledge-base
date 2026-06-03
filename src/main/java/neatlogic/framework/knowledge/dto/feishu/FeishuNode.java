@@ -23,6 +23,7 @@ public class FeishuNode {
     private final String title;
     private final String updateTime;
     private final List<String> path = new ArrayList<>();
+    private List<FeishuNode> children;
 
     public FeishuNode(JSONObject item) {
         this.nodeToken = item.getString("node_token");
@@ -54,5 +55,13 @@ public class FeishuNode {
 
     public List<String> getPath() {
         return path;
+    }
+
+    public List<FeishuNode> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<FeishuNode> children) {
+        this.children = children;
     }
 }

@@ -10,6 +10,7 @@
 
 package neatlogic.framework.knowledge.dto.feishu;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.common.dto.BasePageVo;
@@ -86,4 +87,34 @@ public class KnowledgeFeishuSyncAuditVo extends BasePageVo {
     public void setStartTime(Date startTime) { this.startTime = startTime; }
     public Date getEndTime() { return endTime; }
     public void setEndTime(Date endTime) { this.endTime = endTime; }
+
+    public void incrementTotalCount() {
+        if (totalCount == null) {
+            totalCount = 0;
+        }
+        totalCount++;
+    }
+    public void incrementSuccessCount() {
+        if (successCount == null) {
+            successCount = 0;
+        }
+        successCount++;
+    }
+    public void incrementFailedCount() {
+        if (failedCount == null) {
+            failedCount = 0;
+        }
+        failedCount++;
+    }
+    public void addDetailItem(JSONObject item) {
+        if (detail == null) {
+            detail = new JSONObject();
+        }
+        JSONArray items = detail.getJSONArray("items");
+        if (items == null) {
+            detail.put("items", new JSONArray());
+            items = detail.getJSONArray("items");
+        }
+        items.add(item);
+    }
 }
