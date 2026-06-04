@@ -33,6 +33,8 @@ public class KnowledgeFeishuSyncAuditVo extends BasePageVo {
     private Integer totalCount;
     @EntityField(name = "success count", type = ApiParamType.INTEGER)
     private Integer successCount;
+    @EntityField(name = "existsUnsupportedComponentFileCount", type = ApiParamType.INTEGER)
+    private Integer existsUnsupportedComponentFileCount;
     @EntityField(name = "failed count", type = ApiParamType.INTEGER)
     private Integer failedCount;
     @EntityField(name = "error", type = ApiParamType.STRING)
@@ -63,6 +65,15 @@ public class KnowledgeFeishuSyncAuditVo extends BasePageVo {
     public void setTotalCount(Integer totalCount) { this.totalCount = totalCount; }
     public Integer getSuccessCount() { return successCount; }
     public void setSuccessCount(Integer successCount) { this.successCount = successCount; }
+
+    public Integer getExistsUnsupportedComponentFileCount() {
+        return existsUnsupportedComponentFileCount;
+    }
+
+    public void setExistsUnsupportedComponentFileCount(Integer existsUnsupportedComponentFileCount) {
+        this.existsUnsupportedComponentFileCount = existsUnsupportedComponentFileCount;
+    }
+
     public Integer getFailedCount() { return failedCount; }
     public void setFailedCount(Integer failedCount) { this.failedCount = failedCount; }
     public String getError() { return error; }
@@ -111,14 +122,25 @@ public class KnowledgeFeishuSyncAuditVo extends BasePageVo {
         }
         failedCount++;
     }
-    public void addDetailItem(JSONObject item) {
+    public void addDetailErrorDocument(JSONObject item) {
         if (detail == null) {
             detail = new JSONObject();
         }
-        JSONArray items = detail.getJSONArray("items");
+        JSONArray items = detail.getJSONArray("errorDocuments");
         if (items == null) {
-            detail.put("items", new JSONArray());
-            items = detail.getJSONArray("items");
+            detail.put("errorDocuments", new JSONArray());
+            items = detail.getJSONArray("errorDocuments");
+        }
+        items.add(item);
+    }
+    public void addDetailUnprocessedDocument(JSONObject item) {
+        if (detail == null) {
+            detail = new JSONObject();
+        }
+        JSONArray items = detail.getJSONArray("unprocessedDocuments");
+        if (items == null) {
+            detail.put("unprocessedDocuments", new JSONArray());
+            items = detail.getJSONArray("unprocessedDocuments");
         }
         items.add(item);
     }

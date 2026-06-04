@@ -22,6 +22,7 @@ public class FeishuNode {
     private final String objType;
     private final String title;
     private final String updateTime;
+    private final Boolean hasChild;
     private final List<String> path = new ArrayList<>();
     private List<FeishuNode> children;
 
@@ -31,6 +32,7 @@ public class FeishuNode {
         this.objType = item.getString("obj_type");
         this.title = StringUtils.defaultIfBlank(item.getString("title"), item.getString("obj_token"));
         this.updateTime = item.getString("obj_edit_time");
+        this.hasChild = item.getBoolean("has_child");
     }
 
     public String getNodeToken() {
@@ -51,6 +53,10 @@ public class FeishuNode {
 
     public String getUpdateTime() {
         return updateTime;
+    }
+
+    public Boolean getHasChild() {
+        return hasChild;
     }
 
     public List<String> getPath() {
