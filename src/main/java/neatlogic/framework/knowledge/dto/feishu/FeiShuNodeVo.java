@@ -32,7 +32,11 @@ public class FeiShuNodeVo {
         this.objToken = item.getString("obj_token");
         this.objType = item.getString("obj_type");
         this.title = StringUtils.defaultIfBlank(item.getString("title"), item.getString("obj_token"));
-        this.updateTime = item.getDate("obj_edit_time");
+        Long objEditTime = item.getLong("obj_edit_time");
+        if (objEditTime != null) {
+            objEditTime = objEditTime * 1000;
+        }
+        this.updateTime = new Date(objEditTime);
         this.hasChild = item.getBoolean("has_child");
     }
 
