@@ -18,6 +18,7 @@ import java.util.Date;
 import java.util.List;
 
 public class FeiShuNodeVo {
+    private final String parentNodeToken;
     private final String nodeToken;
     private final String objToken;
     private final String objType;
@@ -26,8 +27,11 @@ public class FeiShuNodeVo {
     private final Boolean hasChild;
     private final List<String> path = new ArrayList<>();
     private List<FeiShuNodeVo> children;
+    private FeiShuNodeVo parent;
+    private Long spaceId;
 
     public FeiShuNodeVo(JSONObject item) {
+        this.parentNodeToken = item.getString("parent_node_token");
         this.nodeToken = item.getString("node_token");
         this.objToken = item.getString("obj_token");
         this.objType = item.getString("obj_type");
@@ -38,6 +42,7 @@ public class FeiShuNodeVo {
         }
         this.updateTime = new Date(objEditTime);
         this.hasChild = item.getBoolean("has_child");
+        this.spaceId = item.getLong("space_id");
     }
 
     public String getNodeToken() {
@@ -74,5 +79,25 @@ public class FeiShuNodeVo {
 
     public void setChildren(List<FeiShuNodeVo> children) {
         this.children = children;
+    }
+
+    public String getParentNodeToken() {
+        return parentNodeToken;
+    }
+
+    public Long getSpaceId() {
+        return spaceId;
+    }
+
+    public void setSpaceId(Long spaceId) {
+        this.spaceId = spaceId;
+    }
+
+    public FeiShuNodeVo getParent() {
+        return parent;
+    }
+
+    public void setParent(FeiShuNodeVo parent) {
+        this.parent = parent;
     }
 }
