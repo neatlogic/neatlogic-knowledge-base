@@ -14,24 +14,25 @@ import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class FeishuNode {
+public class FeiShuNodeVo {
     private final String nodeToken;
     private final String objToken;
     private final String objType;
     private final String title;
-    private final String updateTime;
+    private final Date updateTime;
     private final Boolean hasChild;
     private final List<String> path = new ArrayList<>();
-    private List<FeishuNode> children;
+    private List<FeiShuNodeVo> children;
 
-    public FeishuNode(JSONObject item) {
+    public FeiShuNodeVo(JSONObject item) {
         this.nodeToken = item.getString("node_token");
         this.objToken = item.getString("obj_token");
         this.objType = item.getString("obj_type");
         this.title = StringUtils.defaultIfBlank(item.getString("title"), item.getString("obj_token"));
-        this.updateTime = item.getString("obj_edit_time");
+        this.updateTime = item.getDate("obj_edit_time");
         this.hasChild = item.getBoolean("has_child");
     }
 
@@ -51,7 +52,7 @@ public class FeishuNode {
         return title;
     }
 
-    public String getUpdateTime() {
+    public Date getUpdateTime() {
         return updateTime;
     }
 
@@ -63,11 +64,11 @@ public class FeishuNode {
         return path;
     }
 
-    public List<FeishuNode> getChildren() {
+    public List<FeiShuNodeVo> getChildren() {
         return children;
     }
 
-    public void setChildren(List<FeishuNode> children) {
+    public void setChildren(List<FeiShuNodeVo> children) {
         this.children = children;
     }
 }
