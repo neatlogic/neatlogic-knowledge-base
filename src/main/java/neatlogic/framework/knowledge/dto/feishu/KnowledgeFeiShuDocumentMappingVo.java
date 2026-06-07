@@ -16,7 +16,7 @@ import neatlogic.framework.knowledge.constvalue.Status;
 
 import java.util.Date;
 
-public class KnowledgeFeishuSyncDocumentVo {
+public class KnowledgeFeiShuDocumentMappingVo {
     private Long configId;
     private String appId;
     private String title;
@@ -36,10 +36,10 @@ public class KnowledgeFeishuSyncDocumentVo {
     private String lcu;
     private Date lcd;
 
-    public KnowledgeFeishuSyncDocumentVo() {
+    public KnowledgeFeiShuDocumentMappingVo() {
     }
 
-    public KnowledgeFeishuSyncDocumentVo(String appId, FeiShuNodeVo feiShuNodeVo) {
+    public KnowledgeFeiShuDocumentMappingVo(String appId, FeiShuNodeVo feiShuNodeVo) {
         this.appId = appId;
         this.title = feiShuNodeVo.getTitle();
         this.nodeToken = feiShuNodeVo.getNodeToken();
