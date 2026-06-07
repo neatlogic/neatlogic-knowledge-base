@@ -62,6 +62,14 @@ public class KnowledgeFeiShuDocumentMappingVo {
         this.spaceId = spaceId;
     }
 
+    public String getParentNodeToken() {
+        return parentNodeToken;
+    }
+
+    public void setParentNodeToken(String parentNodeToken) {
+        this.parentNodeToken = parentNodeToken;
+    }
+
     public String getNodeToken() { return nodeToken; }
     public void setNodeToken(String nodeToken) { this.nodeToken = nodeToken; }
     public String getObjToken() { return objToken; }
