@@ -10,11 +10,15 @@
 
 package neatlogic.framework.knowledge.constvalue;
 
+import com.alibaba.fastjson.JSONObject;
+import neatlogic.framework.common.constvalue.IEnum;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public enum Status {
+public enum Status implements IEnum<JSONObject> {
     SUCCEED("succeed", "已成功"),
     FAILED("failed", "失败"),
     RUNNING("running", "进行中"),
@@ -29,6 +33,20 @@ public enum Status {
     Status(String value, String text) {
         this.value = value;
         this.text = text;
+    }
+
+    /**
+     * 不同的枚举类，返回不同的枚举值，可自由组合成List<>或者JSONArray
+     *
+     * @return 枚举列表
+     */
+    @Override
+    public List<JSONObject> getValueTextList() {
+        List<JSONObject> list = new ArrayList<>();
+        for (Status status : values()) {
+            list.add(new JSONObject().fluentPut("value", status.getValue()).fluentPut("text", status.getText()));
+        }
+        return list;
     }
 
     public String getValue() {
