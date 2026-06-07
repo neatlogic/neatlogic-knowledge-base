@@ -12,6 +12,7 @@ package neatlogic.framework.knowledge.dto.feishu;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.annotation.JSONField;
+import neatlogic.framework.knowledge.constvalue.Status;
 
 import java.util.Date;
 
@@ -46,6 +47,8 @@ public class KnowledgeFeishuSyncDocumentVo {
         this.objType = feiShuNodeVo.getObjType();
         this.updateTime = feiShuNodeVo.getUpdateTime();
         this.hasChild = feiShuNodeVo.getHasChild();
+        this.status = Status.NOT_SYNCED.getValue();
+        this.statusText = Status.NOT_SYNCED.getText();
     }
 
     public Long getConfigId() { return configId; }
@@ -72,6 +75,9 @@ public class KnowledgeFeishuSyncDocumentVo {
     }
 
     public String getStatusText() {
+        if (status != null) {
+            statusText = Status.getText(status);
+        }
         return statusText;
     }
 
