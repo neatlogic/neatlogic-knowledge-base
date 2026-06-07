@@ -20,6 +20,7 @@ public class KnowledgeFeiShuDocumentMappingVo {
     private String appId;
     private Long spaceId;
     private String title;
+    private String parentNodeToken;
     private String nodeToken;
     private String objToken;
     private String objType;
@@ -43,6 +44,7 @@ public class KnowledgeFeiShuDocumentMappingVo {
         this.appId = appId;
         this.spaceId = feiShuNodeVo.getSpaceId();
         this.title = feiShuNodeVo.getTitle();
+        this.parentNodeToken = feiShuNodeVo.getParentNodeToken();
         this.nodeToken = feiShuNodeVo.getNodeToken();
         this.objToken = feiShuNodeVo.getObjToken();
         this.objType = feiShuNodeVo.getObjType();
