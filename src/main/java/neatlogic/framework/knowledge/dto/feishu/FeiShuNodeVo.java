@@ -29,6 +29,7 @@ public class FeiShuNodeVo {
     private List<FeiShuNodeVo> children;
     private FeiShuNodeVo parent;
     private Long spaceId;
+    private String spaceName;
 
     public FeiShuNodeVo(JSONObject item) {
         this.parentNodeToken = item.getString("parent_node_token");
@@ -99,5 +100,13 @@ public class FeiShuNodeVo {
 
     public void setParent(FeiShuNodeVo parent) {
         this.parent = parent;
+    }
+
+    public String getSpaceName() {
+        return spaceName;
+    }
+
+    public void setSpaceName(String spaceName) {
+        this.spaceName = spaceName;
     }
 }
