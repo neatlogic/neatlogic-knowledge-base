@@ -17,8 +17,8 @@ import neatlogic.framework.knowledge.constvalue.Status;
 import java.util.Date;
 
 public class KnowledgeFeiShuDocumentMappingVo {
-    private Long configId;
     private String appId;
+    private Long spaceId;
     private String title;
     private String nodeToken;
     private String objToken;
@@ -41,6 +41,7 @@ public class KnowledgeFeiShuDocumentMappingVo {
 
     public KnowledgeFeiShuDocumentMappingVo(String appId, FeiShuNodeVo feiShuNodeVo) {
         this.appId = appId;
+        this.spaceId = feiShuNodeVo.getSpaceId();
         this.title = feiShuNodeVo.getTitle();
         this.nodeToken = feiShuNodeVo.getNodeToken();
         this.objToken = feiShuNodeVo.getObjToken();
@@ -51,8 +52,14 @@ public class KnowledgeFeiShuDocumentMappingVo {
         this.statusText = Status.NOT_SYNCED.getText();
     }
 
-    public Long getConfigId() { return configId; }
-    public void setConfigId(Long configId) { this.configId = configId; }
+    public Long getSpaceId() {
+        return spaceId;
+    }
+
+    public void setSpaceId(Long spaceId) {
+        this.spaceId = spaceId;
+    }
+
     public String getNodeToken() { return nodeToken; }
     public void setNodeToken(String nodeToken) { this.nodeToken = nodeToken; }
     public String getObjToken() { return objToken; }
