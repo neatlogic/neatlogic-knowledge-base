@@ -12,6 +12,7 @@ package neatlogic.framework.knowledge.constvalue;
 
 import com.alibaba.fastjson.JSONObject;
 import neatlogic.framework.common.constvalue.IEnum;
+import neatlogic.framework.util.$;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -19,12 +20,12 @@ import java.util.List;
 import java.util.Objects;
 
 public enum Status implements IEnum<JSONObject> {
-    SUCCEED("succeed", "已成功"),
-    FAILED("failed", "失败"),
-    RUNNING("running", "进行中"),
-    WAITING("waiting", "排队中"),
-    UNSUPPORTED("unsupported", "有不支持控件"),
-    NOT_SYNCED("notSynced", "未同步"),
+    SUCCEED("succeed", "common.succeed"),
+    FAILED("failed", "common.failed"),
+    RUNNING("running", "common.doing"),
+    WAITING("waiting", "common.waiting"),
+    UNSUPPORTED("unsupported", "nfkc.status.unsupported"),
+    NOT_SYNCED("notSynced", "common.notsynced"),
     ;
 
     private final String value;
@@ -54,13 +55,13 @@ public enum Status implements IEnum<JSONObject> {
     }
 
     public String getText() {
-        return text;
+        return $.t(text);
     }
 
     public static String getText(String value) {
         for (Status status : values()) {
             if (Objects.equals(status.getValue(), value)) {
-                return status.text;
+                return status.getText();
             }
         }
         return StringUtils.EMPTY;
