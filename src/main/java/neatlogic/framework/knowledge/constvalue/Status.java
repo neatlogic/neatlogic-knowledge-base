@@ -26,6 +26,7 @@ public enum Status implements IEnum<JSONObject> {
     WAITING("waiting", "common.waiting"),
     UNSUPPORTED("unsupported", "nfkc.status.unsupported"),
     NOT_SYNCED("notSynced", "common.notsynced"),
+    CANCELED("canceled", "common.canceled"),
     ;
 
     private final String value;
