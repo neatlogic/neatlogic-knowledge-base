@@ -40,6 +40,10 @@ public interface KnowledgeDocumentMapper {
 
     List<KnowledgeDocumentVo> getKnowledgeDocumentByIdListAndFcd(@Param("documentIdList") List<Long> documentIdList, @Param("fromDate") String fromDate, @Param("toDate") String toDate);
 
+    int getPublishedKnowledgeDocumentCountForRag(@Param("knowledgeCircleIdList") List<Long> knowledgeCircleIdList, @Param("knowledgeDocumentTypeUuidList") List<String> knowledgeDocumentTypeUuidList);
+
+    List<KnowledgeDocumentVo> searchPublishedKnowledgeDocumentForRag(@Param("knowledgeCircleIdList") List<Long> knowledgeCircleIdList, @Param("knowledgeDocumentTypeUuidList") List<String> knowledgeDocumentTypeUuidList, @Param("lastId") Long lastId, @Param("pageSize") Integer pageSize);
+
     List<Long> getKnowledgeDocumentVersionIdListByLcd(@Param("documentVersionIdList") List<Long> documentVersionIdList, @Param("fromDate") String fromDate, @Param("toDate") String toDate);
 
     KnowledgeDocumentVersionVo getKnowledgeDocumentVersionById(Long id);

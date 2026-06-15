@@ -675,6 +675,68 @@
         </where>
     </select>
 
+    <sql id="publishedKnowledgeDocumentForRagSql">
+        kd.`is_delete` = 0
+        AND kdv.`is_delete` = 0
+        AND kdv.`status` = 'passed'
+        AND kd.`knowledge_document_version_id` = kdv.`id`
+        <if test="knowledgeCircleIdList != null and knowledgeCircleIdList.size() > 0">
+            AND kd.`knowledge_circle_id` IN
+            <foreach collection="knowledgeCircleIdList" item="circleId" open="(" separator="," close=")">
+                #{circleId}
+            </foreach>
+        </if>
+        <if test="knowledgeDocumentTypeUuidList != null and knowledgeDocumentTypeUuidList.size() > 0">
+            AND kdv.`knowledge_document_type_uuid` IN
+            <foreach collection="knowledgeDocumentTypeUuidList" item="typeUuid" open="(" separator="," close=")">
+                #{typeUuid}
+            </foreach>
+        </if>
+    </sql>
+
+    <select id="getPublishedKnowledgeDocumentCountForRag" resultType="int">
+        SELECT COUNT(1)
+        FROM `knowledge_document` kd
+                 JOIN `knowledge_document_version` kdv ON kd.`id` = kdv.`knowledge_document_id`
+        WHERE
+        <include refid="publishedKnowledgeDocumentForRagSql"/>
+    </select>
+
+    <select id="searchPublishedKnowledgeDocumentForRag" resultMap="knowledgeDocumentMap">
+        SELECT kd.`id`,
+               kdv.`version`,
+               kdv.`id`                          AS knowledgeDocumentVersionId,
+               kc.`name`                         AS knowledgeCircleName,
+               kc.`id`                           AS knowledgeCircleId,
+               kd.`title`,
+               kdv.`lcd`,
+               kdv.`lcu`,
+               kdv.`status`,
+               kd.`source`,
+               (SELECT `user_name` FROM `user` WHERE `uuid` = kdv.`lcu`) AS lcuName,
+               (SELECT GROUP_CONCAT(`name` ORDER BY `lft` SEPARATOR '/')
+                FROM `knowledge_document_type`
+                WHERE lft &lt; (SELECT a.`lft`
+                              FROM `knowledge_document_type` a
+                              WHERE a.`uuid` = kdv.`knowledge_document_type_uuid`)
+                  AND rht > (SELECT a.`rht`
+                             FROM `knowledge_document_type` a
+                             WHERE a.`uuid` = kdv.`knowledge_document_type_uuid`)) AS documentTypePath,
+               kdv.`knowledge_document_type_uuid` AS knowledgeDocumentTypeUuid
+        FROM `knowledge_document` kd
+                 JOIN `knowledge_document_version` kdv ON kd.`id` = kdv.`knowledge_document_id`
+                 LEFT JOIN `knowledge_circle` kc ON kd.`knowledge_circle_id` = kc.`id`
+        WHERE
+        <include refid="publishedKnowledgeDocumentForRagSql"/>
+        <if test="lastId != null and lastId > 0">
+            AND kd.`id` > #{lastId}
+        </if>
+        ORDER BY kd.`id`
+        <if test="pageSize != null and pageSize > 0">
+            LIMIT #{pageSize}
+        </if>
+    </select>
+
     <select id="getKnowledgeDocumentVersionIdList" resultType="java.lang.Long">
         SELECT id
         FROM `knowledge_document_version`
