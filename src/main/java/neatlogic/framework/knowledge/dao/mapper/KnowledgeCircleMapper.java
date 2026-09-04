@@ -16,6 +16,11 @@ public interface KnowledgeCircleMapper {
 
     public List<KnowledgeCircleVo> searchKnowledgeCircle(KnowledgeCircleVo knowledgeCircleVo);
 
+    /**
+     * 按稳定顺序返回当前租户的全部知识圈基础信息。
+     */
+    public List<KnowledgeCircleVo> getAllKnowledgeCircleList();
+
     public KnowledgeCircleVo getKnowledgeCircleById(Long id);
 
     public List<KnowledgeCircleUserVo> getKnowledgeCircleUserList(Long knowledgeCircleId);

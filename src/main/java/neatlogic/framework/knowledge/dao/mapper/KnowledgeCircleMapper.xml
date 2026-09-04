@@ -37,6 +37,12 @@
 		</if>
 	</select>
 
+	<select id="getAllKnowledgeCircleList" resultType="neatlogic.framework.knowledge.dto.KnowledgeCircleVo">
+		SELECT `id`, `name`
+		FROM `knowledge_circle`
+		ORDER BY `name`, `id`
+	</select>
+
 	<select id="getKnowledgeCircleById" parameterType="java.lang.Long" resultType="neatlogic.framework.knowledge.dto.KnowledgeCircleVo">
 		select
 		a.`id`,
