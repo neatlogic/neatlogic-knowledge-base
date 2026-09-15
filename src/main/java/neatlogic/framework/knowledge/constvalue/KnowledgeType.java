@@ -2,12 +2,15 @@ package neatlogic.framework.knowledge.constvalue;
 
 import neatlogic.framework.util.$;
 
+/**
+ * 知识分类菜单定义，名称通过国际化键按当前请求语言翻译。
+ */
 public enum KnowledgeType {
-    ALL("all", "所有"),
-    WAITINGFORREVIEW("waitingforreview", "待我审批"),
-    SHARE("share", "我提交的"),
-    COLLECT("collect", "我的收藏"),
-    DRAFT("draft", "草稿");
+    ALL("all", "common.all"),
+    WAITINGFORREVIEW("waitingforreview", "knowledge.category.waitingforreview"),
+    SHARE("share", "knowledge.category.submittedbyme"),
+    COLLECT("collect", "knowledge.category.myfavorites"),
+    DRAFT("draft", "common.draft");
     private String value;
     private String text;
     private KnowledgeType(String value, String text) {
