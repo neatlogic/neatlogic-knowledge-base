@@ -12,13 +12,19 @@
 	<version>0.4.0.0-SNAPSHOT</version>
 	<build>
 		<resources>
-			<resource>
-				<directory>src/main/java</directory>
+            <resource>
+                <directory>src/main/java</directory>
 				<includes>
 					<include>**/*.xml</include>
 					<include>META-INF/**</include>
-				</includes>
-			</resource>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <includes>
+                    <include>neatlogic/**</include>
+                </includes>
+            </resource>
 		</resources>
 	</build>
 	<dependencies>
@@ -27,4 +33,4 @@
 			<artifactId>neatlogic-framework</artifactId>
 		</dependency>
 	</dependencies> 
-</project> 
+</project>

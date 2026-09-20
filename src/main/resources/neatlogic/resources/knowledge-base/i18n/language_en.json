@@ -1,0 +1,51 @@
+{
+  "auth": {
+    "knowledge": {
+      "description": "Access underlying knowledge base features through APIs, such as querying knowledge base files.",
+      "name": "Knowledge Base API Access Permission"
+    }
+  },
+  "knowledge": {
+    "category": {
+      "myfavorites": "My Favorites",
+      "submittedbyme": "Submitted by Me",
+      "waitingforreview": "Pending My Approval"
+    }
+  },
+  "nfkc": {
+    "status": {
+      "unsupported": "There are unsupported controls"
+    }
+  },
+  "nfke": {
+    "knowledgecirclenotfoundedittargetexception": {
+      "knowledgecirclenotfoundedittargetexception": "Knowledge Circle: {0} does not exist"
+    },
+    "knowledgedocumentdraftreviewedexception": {
+      "knowledgedocumentdraftreviewedexception": "The draft has been approved and does not require repeated approval"
+    },
+    "knowledgedocumentnotfoundedittargetexception": {
+      "knowledgedocumentnotfoundedittargetexception": "Knowledge base document: {0} does not exist"
+    },
+    "knowledgedocumentversionnotfoundedittargetexception": {
+      "knowledgedocumentversionnotfoundedittargetexception": "Knowledge base document version: {0} does not exist"
+    },
+    "knowledgetemplatenotfoundedittargetexception": {
+      "knowledgetemplatenotfoundedittargetexception": "Knowledge template: {0} does not exist"
+    }
+  },
+  "term": {
+    "knowledge": {
+      "circleinfo": "Knowledge Circle Information",
+      "documentid": "Document ID",
+      "documentinfo": "Document content",
+      "documentversionid": "Document version ID",
+      "groupdesc": "Knowledge platform",
+      "groupname": "Knowledge",
+      "name": "Knowledge",
+      "reviewdate": "Approval time",
+      "templateinfo": "Knowledge template information",
+      "typepath": "Knowledge Circle Classification Path"
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "auth": {
+    "knowledge": {
+      "description": "拥有此权限可以通过接口访问知识库一些底层功能，例如查询知识库文件等",
+      "name": "知识库基础权限（接口）"
+    }
+  },
+  "knowledge": {
+    "category": {
+      "myfavorites": "我的收藏",
+      "submittedbyme": "我提交的",
+      "waitingforreview": "待我审批"
+    }
+  },
+  "nfkc": {
+    "status": {
+      "unsupported": "有不支持控件"
+    }
+  },
+  "nfke": {
+    "knowledgecirclenotfoundedittargetexception": {
+      "knowledgecirclenotfoundedittargetexception": "知识圈：{0}不存在"
+    },
+    "knowledgedocumentdraftreviewedexception": {
+      "knowledgedocumentdraftreviewedexception": "草稿已经审批通过,无需重复审批"
+    },
+    "knowledgedocumentnotfoundedittargetexception": {
+      "knowledgedocumentnotfoundedittargetexception": "知识库文档：{0}不存在"
+    },
+    "knowledgedocumentversionnotfoundedittargetexception": {
+      "knowledgedocumentversionnotfoundedittargetexception": "知识库文档版本：{0}不存在"
+    },
+    "knowledgetemplatenotfoundedittargetexception": {
+      "knowledgetemplatenotfoundedittargetexception": "知识模版：{0}不存在"
+    }
+  },
+  "term": {
+    "knowledge": {
+      "circleinfo": "知识圈信息",
+      "documentid": "文档id",
+      "documentinfo": "文档内容",
+      "documentversionid": "文档版本id",
+      "groupdesc": "知识库平台",
+      "groupname": "知识库",
+      "name": "知识库模块",
+      "reviewdate": "审批时间",
+      "templateinfo": "知识模版信息",
+      "typepath": "知识圈分类路径"
+    }
+  }
+}
