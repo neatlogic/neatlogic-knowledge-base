@@ -8,6 +8,7 @@ import neatlogic.framework.knowledge.source.SyncSourceFactory;
 import neatlogic.framework.restful.annotation.EntityField;
 import neatlogic.framework.util.SnowflakeUtil;
 import neatlogic.framework.util.TimeUtil;
+import neatlogic.framework.util.$;
 import neatlogic.framework.knowledge.constvalue.KnowledgeDocumentVersionStatus;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -183,7 +184,7 @@ public class KnowledgeDocumentVersionVo extends BaseEditorVo {
     public String getVersionName() {
         if (StringUtils.isBlank(versionName)) {
             if (version != null) {
-                versionName = "版本" + version;
+                versionName = $.t("nmkd.knowledgedocumentversionvo.versionname", version);
             } else {
                 versionName = "-";
             }

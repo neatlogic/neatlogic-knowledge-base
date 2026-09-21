@@ -6,6 +6,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.restful.annotation.EntityField;
+import neatlogic.framework.util.$;
 
 public class KnowledgeDocumentHistoricalVersionVo extends BaseEditorVo {
     @EntityField(name = "版本id", type = ApiParamType.LONG)
@@ -42,7 +43,7 @@ public class KnowledgeDocumentHistoricalVersionVo extends BaseEditorVo {
     }
     public String getVersionName() {
         if(StringUtils.isBlank(versionName) && version != null) {
-            versionName = "版本" + version;
+            versionName = $.t("nmkd.knowledgedocumenthistoricalversionvo.versionname", version);
         }
         return versionName;
     }
