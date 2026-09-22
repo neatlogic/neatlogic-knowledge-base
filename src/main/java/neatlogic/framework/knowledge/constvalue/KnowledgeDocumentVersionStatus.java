@@ -3,12 +3,12 @@ package neatlogic.framework.knowledge.constvalue;
 import neatlogic.framework.util.$;
 
 public enum KnowledgeDocumentVersionStatus {
-    ALL("all","nmkc.knowledgedocumentversionstatus.all",""),
-    DRAFT("draft", "nmkc.knowledgedocumentversionstatus.draft",""),
-    SUBMITTED("submitted", "nmkc.knowledgedocumentversionstatus.submitted","#F59A23"),
-    PASSED("passed", "nmkc.knowledgedocumentversionstatus.passed","#00BCD4"),
+    ALL("all","nmkb.knowledgedocumentversionstatus.all",""),
+    DRAFT("draft", "nmkb.knowledgedocumentversionstatus.draft",""),
+    SUBMITTED("submitted", "nmkb.knowledgedocumentversionstatus.submitted","#F59A23"),
+    PASSED("passed", "nmkb.knowledgedocumentversionstatus.passed","#00BCD4"),
 //    EXPIRED("expired", "已失效"),
-    REJECTED("rejected", "nmkc.knowledgedocumentversionstatus.rejected","#D9001B");
+    REJECTED("rejected", "nmkb.knowledgedocumentversionstatus.rejected","#D9001B");
     private String value;
     private String text;
     private String color;

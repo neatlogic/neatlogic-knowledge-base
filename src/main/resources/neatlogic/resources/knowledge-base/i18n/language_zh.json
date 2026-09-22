@@ -12,6 +12,22 @@
       "waitingforreview": "待我审批"
     }
   },
+  "nmkb": {
+    "knowledgedocumentoperate": {
+      "deleteversion": "删除【版本${DATA.version}】",
+      "pass": "通过了审核",
+      "reject": "退回了审核",
+      "submit": "提交了审核",
+      "switchversion": "切换【版本${DATA.oldVersion}】至【版本${DATA.newVersion}】"
+    },
+    "knowledgedocumentversionstatus": {
+      "all": "全部",
+      "draft": "未提交",
+      "passed": "已通过",
+      "rejected": "不通过",
+      "submitted": "待审批"
+    }
+  },
   "nfkc": {
     "status": {
       "unsupported": "有不支持控件"

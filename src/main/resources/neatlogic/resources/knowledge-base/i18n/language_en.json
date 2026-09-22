@@ -12,6 +12,22 @@
       "waitingforreview": "Pending My Approval"
     }
   },
+  "nmkb": {
+    "knowledgedocumentoperate": {
+      "deleteversion": "Deleted version ${DATA.version}",
+      "pass": "Approved the document",
+      "reject": "Rejected the document",
+      "submit": "Submitted the document for approval",
+      "switchversion": "Switched from version ${DATA.oldVersion} to version ${DATA.newVersion}"
+    },
+    "knowledgedocumentversionstatus": {
+      "all": "All",
+      "draft": "Unsubmitted",
+      "passed": "Approved",
+      "rejected": "Rejected",
+      "submitted": "Pending Approval"
+    }
+  },
   "nfkc": {
     "status": {
       "unsupported": "There are unsupported controls"
