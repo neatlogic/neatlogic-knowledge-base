@@ -10,6 +10,13 @@
       "myfavorites": "我的收藏",
       "submittedbyme": "我提交的",
       "waitingforreview": "待我审批"
+    },
+    "tenantconfig": {
+      "feishu": {
+        "appid": "飞书应用的唯一标识",
+        "appsecret": "飞书应用的密钥",
+        "wikiknowledgecircleid": "飞书 Wiki 对应的知识圈"
+      }
     }
   },
   "nmkb": {

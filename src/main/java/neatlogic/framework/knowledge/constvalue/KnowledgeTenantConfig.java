@@ -12,11 +12,12 @@ package neatlogic.framework.knowledge.constvalue;
 
 import neatlogic.framework.common.constvalue.ApiParamType;
 import neatlogic.framework.config.ITenantConfig;
+import neatlogic.framework.util.$;
 
 public enum KnowledgeTenantConfig implements ITenantConfig {
-    FEISHU_APP_ID("feishu.app.id","","飞书应用的唯一标识",ApiParamType.STRING),
-    FEISHU_APP_SECRET("feishu.app.secret","","飞书应用的密钥",ApiParamType.STRING),
-    FEISHU_WIKI_KNOWLEDGE_CIRCLE_ID("feishu.wiki.knowledge.circle.id","","飞书wiki对应的知识圈",ApiParamType.LONG),
+    FEISHU_APP_ID("feishu.app.id","","knowledge.tenantconfig.feishu.appid",ApiParamType.STRING),
+    FEISHU_APP_SECRET("feishu.app.secret","","knowledge.tenantconfig.feishu.appsecret",ApiParamType.STRING),
+    FEISHU_WIKI_KNOWLEDGE_CIRCLE_ID("feishu.wiki.knowledge.circle.id","","knowledge.tenantconfig.feishu.wikiknowledgecircleid",ApiParamType.LONG),
     ;
 
     final String key;
@@ -42,9 +43,10 @@ public enum KnowledgeTenantConfig implements ITenantConfig {
         return this.value;
     }
 
+    /** 返回当前语言环境下的租户配置描述。 */
     @Override
     public String getDescription() {
-        return this.description;
+        return $.t(this.description);
     }
 
     @Override

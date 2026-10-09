@@ -10,6 +10,13 @@
       "myfavorites": "My Favorites",
       "submittedbyme": "Submitted by Me",
       "waitingforreview": "Pending My Approval"
+    },
+    "tenantconfig": {
+      "feishu": {
+        "appid": "Feishu application identifier",
+        "appsecret": "Feishu application secret",
+        "wikiknowledgecircleid": "Knowledge circle corresponding to the Feishu Wiki"
+      }
     }
   },
   "nmkb": {
