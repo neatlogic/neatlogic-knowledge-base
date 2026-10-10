@@ -130,9 +130,13 @@ public interface KnowledgeDocumentMapper {
 
     int getDocumentFavorCount(Long documentId);
 
+    List<String> getDocumentFavorUserUuidList(Long documentId);
+
     int checkDocumentHasBeenCollected(@Param("documentId") Long documentId, @Param("userUuid") String userUuid);
 
     int getDocumentCollectCount(Long documentId);
+
+    List<String> getDocumentCollectUserUuidList(Long documentId);
 
     int checkExistsDocumentViewCount(Long documentId);
 

@@ -1092,6 +1092,14 @@
         where `knowledge_document_id` = #{value}
     </select>
 
+    <select id="getDocumentFavorUserUuidList" parameterType="java.lang.Long" resultType="java.lang.String" useCache="false">
+        select `user_uuid`
+        from `knowledge_document_favor`
+        where `knowledge_document_id` = #{value}
+        order by `fcd` desc
+        LIMIT 100
+    </select>
+
     <select id="checkDocumentHasBeenCollected" resultType="int" useCache="false">
         select count(1)
         from `knowledge_document_collect`
@@ -1103,6 +1111,14 @@
         select count(1)
         from `knowledge_document_collect`
         where `knowledge_document_id` = #{value}
+    </select>
+
+    <select id="getDocumentCollectUserUuidList" parameterType="java.lang.Long" resultType="java.lang.String" useCache="false">
+        select `user_uuid`
+        from `knowledge_document_collect`
+        where `knowledge_document_id` = #{value}
+        order by `fcd` desc
+        LIMIT 100
     </select>
 
     <select id="checkExistsDocumentViewCount" parameterType="java.lang.Long" resultType="int" useCache="false">
