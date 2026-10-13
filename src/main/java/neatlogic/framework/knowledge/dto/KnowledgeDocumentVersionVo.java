@@ -76,7 +76,7 @@ public class KnowledgeDocumentVersionVo extends BaseEditorVo {
     @EntityField(name = "不通过原因", type = ApiParamType.STRING)
     private String rejectReason;
     @EntityField(name = "行数据列表", type = ApiParamType.JSONARRAY)
-    private List<KnowledgeDocumentLineVo> knowledgeDocumentLineList = new ArrayList<>();
+    private List<KnowledgeDocumentLineVo> lineList = new ArrayList<>();
     @JSONField(serialize = false)
     private boolean isAutoGenerateId = true;
     @JSONField(serialize = false)
@@ -347,12 +347,12 @@ public class KnowledgeDocumentVersionVo extends BaseEditorVo {
         this.path = path;
     }
 
-    public List<KnowledgeDocumentLineVo> getKnowledgeDocumentLineList() {
-        return knowledgeDocumentLineList;
+    public List<KnowledgeDocumentLineVo> getLineList() {
+        return lineList;
     }
 
-    public void setKnowledgeDocumentLineList(List<KnowledgeDocumentLineVo> knowledgeDocumentLineList) {
-        this.knowledgeDocumentLineList = knowledgeDocumentLineList;
+    public void setLineList(List<KnowledgeDocumentLineVo> lineList) {
+        this.lineList = lineList;
     }
 
     public List<String> getTagList() {
