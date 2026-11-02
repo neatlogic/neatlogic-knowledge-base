@@ -1,8 +1,10 @@
 package neatlogic.framework.knowledge.auth.label;
 
 import neatlogic.framework.auth.core.AuthBase;
+import neatlogic.framework.auth.core.AuthModule;
 
 /** 权限名称与说明使用国际化键，权限标识及校验规则保持不变。 */
+@AuthModule("knowledge")
 public class KNOWLEDGE extends AuthBase {
     @Override
     public String getAuthDisplayName() {
