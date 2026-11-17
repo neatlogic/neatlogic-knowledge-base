@@ -21,7 +21,8 @@
         "appsecret": "飞书应用的密钥",
         "wikiknowledgecircleid": "飞书 Wiki 对应的知识圈"
       }
-    }
+    },
+    "versionstatechanged": "保存知识版本 {0} 失败，预期状态为 {1}，当前状态为 {2}，删除标记为 {3}，请重新选择文档。"
   },
   "nfkc": {
     "status": {

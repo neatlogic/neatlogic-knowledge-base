@@ -124,6 +124,24 @@
     </select>
 
     <sql id="searchDocumentVersionSql">
+        <!-- 内部草稿范围只由服务端设置，版本查询及计数均在分页前执行这些约束。 -->
+        <if test="editableDraftScope != null">
+            AND kdv.lcu = #{editableDraftScope.circleUserUuid} AND kdv.status = 'draft'
+            AND kdv.is_delete = 0 AND kd.is_delete = 0
+            <bind name="circleUserUuid" value="editableDraftScope.circleUserUuid"/>
+            <bind name="circleTeamUuidList" value="editableDraftScope.circleTeamUuidList"/>
+            <bind name="circleRoleUuidList" value="editableDraftScope.circleRoleUuidList"/>
+            AND EXISTS (
+                SELECT 1 FROM knowledge_circle_user kcu
+                JOIN knowledge_document_type editableType ON editableType.knowledge_circle_id = kcu.knowledge_circle_id
+                WHERE editableType.uuid = kdv.knowledge_document_type_uuid
+                <include refid="circleUserSql"/>
+            )
+            <if test="editableDraftScope.knowledgeDocumentTypeUuidList != null and editableDraftScope.knowledgeDocumentTypeUuidList.size() > 0">
+                AND kdv.knowledge_document_type_uuid IN
+                <foreach collection="editableDraftScope.knowledgeDocumentTypeUuidList" item="typeUuid" open="(" separator="," close=")">#{typeUuid}</foreach>
+            </if>
+        </if>
         <if test="keywordList != null and keywordList.size() > 0">
             AND EXISTS (SELECT
             1
@@ -135,6 +153,7 @@
             </foreach>
             )
         </if>
+
         <if test="lcuList != null and lcuList.size()>0 ">
             and kdv.`lcu` in
             <foreach collection="lcuList" item="lcu" open="(" separator="," close=")">
@@ -160,7 +179,7 @@
             </foreach>
         </if>
 
-        <if test="knowledgeDocumentTypeUuid != null and knowledgeDocumentTypeUuid != ''">
+        <if test="editableDraftScope == null and knowledgeDocumentTypeUuid != null and knowledgeDocumentTypeUuid != ''">
             and kd.`knowledge_document_type_uuid` in (
             SELECT `uuid` FROM `knowledge_document_type` WHERE
             `lft` >= (
@@ -1555,8 +1574,10 @@
         VALUES (#{documentId}, #{versionId}, #{source}, #{invokeId})
     </insert>
 
+    <!-- 关联入口携带版本自身的来源版本及分类，供审批详情区分新增和修订文档。 -->
     <select id="listOrigins" resultType="com.alibaba.fastjson.JSONObject">
         SELECT d.id AS documentId, v.id AS versionId, v.version, v.status,
+               v.from_version AS fromVersion, v.knowledge_document_type_uuid AS knowledgeDocumentTypeUuid,
                COALESCE(v.title,d.title) AS title, v.lcu, v.reviewer, d.knowledge_circle_id AS circleId,
                i.source, i.invoke_id AS invokeId
         FROM knowledge_document_invoke i

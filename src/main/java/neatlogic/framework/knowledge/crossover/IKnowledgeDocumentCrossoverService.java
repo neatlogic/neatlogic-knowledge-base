@@ -25,6 +25,9 @@ public interface IKnowledgeDocumentCrossoverService extends ICrossoverService {
     /** 按知识圈、分类和关键词分页检索，返回可见文档及分页信息。 */
     JSONObject searchDocuments(JSONObject filter);
 
+    /** 复用版本列表检索；editableDraftOnly 由内部调用方指定，限定本人仍可编辑的草稿。 */
+    JSONObject searchDocumentVersions(JSONObject filter, boolean editableDraftOnly);
+
     /** 新建或修订文档草稿，按 isSubmit 决定是否送审，返回文档和版本标识。 */
     JSONObject saveDraft(JSONObject draft) throws PermissionDeniedException;
 

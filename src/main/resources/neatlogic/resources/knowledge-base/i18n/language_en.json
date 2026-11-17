@@ -21,7 +21,8 @@
         "appsecret": "Feishu application secret",
         "wikiknowledgecircleid": "Knowledge circle corresponding to the Feishu Wiki"
       }
-    }
+    },
+    "versionstatechanged": "Cannot save knowledge version {0}. Expected status {1}, actual status {2}, deletion flag {3}. Select the document again."
   },
   "nfkc": {
     "status": {

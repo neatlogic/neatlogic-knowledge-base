@@ -20,7 +20,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/** 知识文档版本及检索条件，内部可编辑草稿范围不接受请求参数。 */
 public class KnowledgeDocumentVersionVo extends BaseEditorVo {
+    // 仅由共用检索服务设置，禁止请求反序列化注入作者、圈子身份和分类范围。
+    @EntityField(name = "common.filter", type = ApiParamType.JSONOBJECT)
+    @JSONField(serialize = false, deserialize = false)
+    private KnowledgeDocumentVo editableDraftScope;
+
     @EntityField(name = "版本id", type = ApiParamType.LONG)
     private Long id;
     @EntityField(name = "文档类型Uuid", type = ApiParamType.LONG)
@@ -137,6 +143,14 @@ public class KnowledgeDocumentVersionVo extends BaseEditorVo {
         }
     }
 
+
+    public KnowledgeDocumentVo getEditableDraftScope() {
+        return editableDraftScope;
+    }
+
+    public void setEditableDraftScope(KnowledgeDocumentVo editableDraftScope) {
+        this.editableDraftScope = editableDraftScope;
+    }
 
     public boolean isAutoGenerateId() {
         return isAutoGenerateId;
