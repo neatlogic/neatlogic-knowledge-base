@@ -11,6 +11,10 @@
       "submittedbyme": "Submitted by Me",
       "waitingforreview": "Pending My Approval"
     },
+    "origin": {
+      "conflict": "Cannot record creation source {0} ({1}) for version {2}. The version already has a creation source.",
+      "converted": "Source {0} ({1}) has already been converted to knowledge document {2}."
+    },
     "tenantconfig": {
       "feishu": {
         "appid": "Feishu application identifier",

@@ -1,5 +1,6 @@
 package neatlogic.framework.knowledge.dao.mapper;
 
+import com.alibaba.fastjson.JSONObject;
 import neatlogic.framework.common.dto.BasePageVo;
 import neatlogic.framework.common.dto.ValueTextVo;
 import neatlogic.framework.fulltextindex.dto.fulltextindex.FullTextIndexTypeVo;
@@ -7,6 +8,7 @@ import neatlogic.framework.knowledge.dto.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface KnowledgeDocumentMapper {
 
@@ -156,7 +158,16 @@ public interface KnowledgeDocumentMapper {
 
     List<Long> getKnowledgeDocumentFavorDocumentIdListByUserUuidAndDocumentIdList(@Param("userUuid") String userUuid, @Param("knowledgeDocumentIdList") List<Long> knowledgeDocumentIdList);
 
-    Long getKnowledgeDocumentIdByInvokeIdAndSource(KnowledgeDocumentInvokeVo knowledgeDocumentInvokeVo);
+    /** 查询指定来源记录直接关联的文档。 */
+    Long getDocumentIdByOrigin(@Param("source") String source, @Param("invokeId") Long invokeId);
+
+    /** 保留以数值 ID 查询直接关联的旧接口。 */
+    default Long getKnowledgeDocumentIdByInvokeIdAndSource(KnowledgeDocumentInvokeVo invoke) {
+        return getDocumentIdByOrigin(invoke.getSource(), invoke.getInvokeId());
+    }
+
+    /** 配合来源记录行锁检查当前已提交的直接关联。 */
+    Long lockDocumentIdByOrigin(KnowledgeDocumentInvokeVo invoke);
 
     KnowledgeDocumentVersionVo getKnowledgeDocumentVersionByknowledgeDocumentIdLimitOne(Long knowledgeDocumentId);
 
@@ -185,7 +196,14 @@ public interface KnowledgeDocumentMapper {
 
     int insertKnowledgeDocumentViewCount(@Param("documentId") Long documentId, @Param("count") int count);
 
-    int insertKnowledgeDocumentInvoke(KnowledgeDocumentInvokeVo knowledgeDocumentInvokeVo);
+    /** 兼容直接创建并激活知识版本的调用方，以新文档的激活版本登记来源。 */
+    int insertKnowledgeDocumentInvoke(KnowledgeDocumentInvokeVo invoke);
+
+    /** 在版本创建事务中写入唯一来源。 */
+    int insertVersionOrigin(JSONObject origin);
+
+    /** 按来源类型和记录标识读取关联，只有旧关联才解析文档激活版本。 */
+    List<JSONObject> listOrigins(@Param("origins") Map<String, List<Long>> origins);
 
     int updateKnowledgeDocumentToDeleteById(Long knowledgeDocumentId);
 
@@ -230,6 +248,9 @@ public interface KnowledgeDocumentMapper {
     int deleteKnowledgeDocumentCollect(@Param("documentId") Long documentId, @Param("userUuid") String userUuid);
 
     int deleteKnowledgeDocumentDraftByKnowledgeDocumentIdAndLcu(@Param("knowledgeDocumentId") Long knowledgeDocumentId, @Param("lcu") String userUuid);
+
+    /** 草稿物理删除时释放其版本来源关联。 */
+    int deleteOriginByVersionId(Long versionId);
 
     int deleteKnowledgeDocumentInvokeByKnowledgeDocumentId(Long knowledgeDocumentId);
 

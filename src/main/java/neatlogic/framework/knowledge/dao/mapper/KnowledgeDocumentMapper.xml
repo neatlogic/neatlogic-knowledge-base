@@ -1367,12 +1367,18 @@
         </foreach>
     </select>
 
-    <select id="getKnowledgeDocumentIdByInvokeIdAndSource"
-            parameterType="neatlogic.framework.knowledge.dto.KnowledgeDocumentInvokeVo" resultType="java.lang.Long">
-        SELECT `knowledge_document_id`
-        FROM `knowledge_document_invoke`
-        WHERE `invoke_id` = #{invokeId}
-          AND `source` = #{source}
+    <select id="getDocumentIdByOrigin" resultType="java.lang.Long">
+        <include refid="documentIdByOrigin"/>
+    </select>
+
+    <sql id="documentIdByOrigin">
+        SELECT knowledge_document_id FROM knowledge_document_invoke
+        WHERE source=BINARY #{source} AND invoke_id=#{invokeId}
+        LIMIT 1
+    </sql>
+
+    <select id="lockDocumentIdByOrigin" resultType="java.lang.Long" flushCache="true" useCache="false">
+        <include refid="documentIdByOrigin"/> FOR UPDATE
     </select>
 
     <select id="getKnowledgeDocumentVersionByknowledgeDocumentIdLimitOne" parameterType="java.lang.Long"
@@ -1536,14 +1542,35 @@
         VALUES (#{documentId}, #{count})
     </insert>
 
+    <!-- 定制工单同步先创建并激活新文档，然后用旧接口登记来源。 -->
     <insert id="insertKnowledgeDocumentInvoke">
-        INSERT INTO `knowledge_document_invoke` (`knowledge_document_id`,
-                                                 `invoke_id`,
-                                                 `source`)
-        VALUES (#{knowledgeDocumentId},
-                #{invokeId},
-                #{source})
+        INSERT INTO knowledge_document_invoke (knowledge_document_id, knowledge_document_version_id, source, invoke_id)
+        SELECT d.id, v.id, #{source}, #{invokeId}
+        FROM knowledge_document d JOIN knowledge_document_version v ON v.id=d.knowledge_document_version_id AND v.knowledge_document_id=d.id
+        WHERE d.id=#{knowledgeDocumentId}
     </insert>
+
+    <insert id="insertVersionOrigin">
+        INSERT INTO knowledge_document_invoke (knowledge_document_id, knowledge_document_version_id, source, invoke_id)
+        VALUES (#{documentId}, #{versionId}, #{source}, #{invokeId})
+    </insert>
+
+    <select id="listOrigins" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT d.id AS documentId, v.id AS versionId, v.version, v.status,
+               COALESCE(v.title,d.title) AS title, v.lcu, v.reviewer, d.knowledge_circle_id AS circleId,
+               i.source, i.invoke_id AS invokeId
+        FROM knowledge_document_invoke i
+        JOIN knowledge_document d ON d.id=i.knowledge_document_id AND d.is_delete=0
+        LEFT JOIN knowledge_document_version v ON v.knowledge_document_id=d.id
+          AND v.is_delete=0 AND v.id=COALESCE(i.knowledge_document_version_id,d.knowledge_document_version_id)
+        WHERE (v.id IS NOT NULL OR (i.knowledge_document_version_id IS NULL AND d.knowledge_document_version_id IS NULL))
+        AND
+        <foreach collection="origins" index="type" item="ids" open="(" close=")" separator=" OR ">
+            (i.source=BINARY #{type} AND i.invoke_id IN
+            <foreach collection="ids" item="id" open="(" close=")" separator=",">#{id}</foreach>)
+        </foreach>
+        ORDER BY v.id DESC, d.id DESC
+    </select>
 
     <update id="updateKnowledgeDocumentToDeleteById" parameterType="java.lang.Long">
         UPDATE `knowledge_document`
@@ -1695,6 +1722,10 @@
         WHERE `knowledge_document_id` = #{knowledgeDocumentId}
           AND `status` = 'draft'
           AND `lcu` = #{lcu}
+    </delete>
+
+    <delete id="deleteOriginByVersionId">
+        DELETE FROM knowledge_document_invoke WHERE knowledge_document_version_id=#{value}
     </delete>
 
     <delete id="deleteKnowledgeDocumentInvokeByKnowledgeDocumentId" parameterType="java.lang.Long">
