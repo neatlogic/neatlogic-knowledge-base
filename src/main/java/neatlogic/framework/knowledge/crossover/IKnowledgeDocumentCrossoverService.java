@@ -43,6 +43,15 @@ public interface IKnowledgeDocumentCrossoverService extends ICrossoverService {
     /** 返回指定版本的正文，用于在已有文档上准备修订稿。 */
     String getVersionText(Long versionId) throws Exception;
 
+    /** 查询已授权的文档引用摘要，激活正文和可编辑草稿分别返回。 */
+    List<JSONObject> getReferenceDocuments(List<Long> documentIds);
+
+    /** 锁定引用目标，使跨工单引用与删除草稿按文档串行。 */
+    void lockReferenceDocument(Long documentId);
+
+    /** 仅删除当前用户拥有且仍处于草稿状态的版本。 */
+    void deleteReferenceDraft(Long documentId, Long draftId) throws Exception;
+
     /** 判断当前用户是否属于指定知识圈。 */
     boolean isCircleMember(Long circleId);
 }

@@ -12,6 +12,11 @@ public interface IKnowledgeGenerationSource {
         return sourceType().equals(scopeType) ? List.of(scopeId) : List.of();
     }
 
+    /** 读取已有关联来源最近一次保存的材料，未提供额外材料的来源返回空。 */
+    default JSONObject getOriginMaterial(Long invokeId) {
+        return null;
+    }
+
     /** 按持久化的来源记录 ID 校验查看权限。 */
     void checkOriginView(Long invokeId);
 

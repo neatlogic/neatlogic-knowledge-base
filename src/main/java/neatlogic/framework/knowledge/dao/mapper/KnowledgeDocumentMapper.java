@@ -202,6 +202,9 @@ public interface KnowledgeDocumentMapper {
     /** 在版本创建事务中写入唯一来源。 */
     int insertVersionOrigin(JSONObject origin);
 
+    /** 读取激活版本与可用于继续编辑、送审或查看的版本。 */
+    List<JSONObject> listReferenceVersions(@Param("ids") List<Long> ids);
+
     /** 按来源类型和记录标识读取关联，只有旧关联才解析文档激活版本。 */
     List<JSONObject> listOrigins(@Param("origins") Map<String, List<Long>> origins);
 

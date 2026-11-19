@@ -11,6 +11,9 @@
       "submittedbyme": "我提交的",
       "waitingforreview": "待我审批"
     },
+    "fromtype": {
+      "document": "知识文档"
+    },
     "origin": {
       "conflict": "无法为版本 {2} 写入创建来源 {0}（{1}）：该版本已有创建来源。",
       "converted": "来源 {0}（{1}）已经转换为知识文档 {2}。"

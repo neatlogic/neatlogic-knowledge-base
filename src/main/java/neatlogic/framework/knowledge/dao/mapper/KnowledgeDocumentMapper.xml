@@ -1574,6 +1574,23 @@
         VALUES (#{documentId}, #{versionId}, #{source}, #{invokeId})
     </insert>
 
+    <select id="listReferenceVersions" resultType="com.alibaba.fastjson.JSONObject">
+        SELECT d.id AS documentId, d.knowledge_document_version_id AS activeId, d.knowledge_circle_id AS circleId,
+               v.id AS versionId, v.title, v.status, v.lcu, v.reviewer, v.from_version AS fromVersion,
+               v.knowledge_document_type_uuid AS knowledgeDocumentTypeUuid,
+               EXISTS (SELECT 1 FROM knowledge_document_version pending
+                       WHERE pending.knowledge_document_id = d.id AND pending.is_delete = 0 AND pending.status = 'submitted') AS hasPending,
+               (SELECT GROUP_CONCAT(parent.name ORDER BY parent.lft SEPARATOR ' / ')
+                FROM knowledge_document_type parent
+                WHERE parent.knowledge_circle_id = d.knowledge_circle_id
+                  AND parent.lft &lt;= category.lft AND parent.rht >= category.rht) AS documentTypePath
+        FROM knowledge_document d JOIN knowledge_document_version v ON v.knowledge_document_id=d.id
+        LEFT JOIN knowledge_document_type category ON category.uuid = v.knowledge_document_type_uuid
+        WHERE d.is_delete=0 AND v.is_delete=0 AND (v.id=d.knowledge_document_version_id OR v.status IN ('draft','submitted','rejected'))
+        AND d.id IN <foreach collection="ids" item="id" open="(" close=")" separator=",">#{id}</foreach>
+        ORDER BY d.id, v.lcd DESC, v.id DESC
+    </select>
+
     <!-- 关联入口携带版本自身的来源版本及分类，供审批详情区分新增和修订文档。 -->
     <select id="listOrigins" resultType="com.alibaba.fastjson.JSONObject">
         SELECT d.id AS documentId, v.id AS versionId, v.version, v.status,

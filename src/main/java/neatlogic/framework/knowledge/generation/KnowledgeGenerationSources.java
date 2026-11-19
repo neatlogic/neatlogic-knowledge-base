@@ -1,5 +1,9 @@
 package neatlogic.framework.knowledge.generation;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import org.apache.commons.codec.digest.DigestUtils;
+import java.util.Arrays;
 import neatlogic.framework.applicationlistener.core.ModuleInitializedListenerBase;
 import neatlogic.framework.bootstrap.NeatLogicWebApplicationContext;
 import neatlogic.framework.common.RootComponent;
@@ -30,6 +34,11 @@ public class KnowledgeGenerationSources extends ModuleInitializedListenerBase {
             }
         }
         return origins;
+    }
+
+    /** 普通文本来源的快照由标题、正文及佐证共同确定，准备与生成使用相同算法。 */
+    public static String textRevision(JSONObject source) {
+        return DigestUtils.sha256Hex(JSON.toJSONString(Arrays.asList(source.getString("title"), source.getString("content"), source.get("evidence"))));
     }
 
     /** 查询来源提供方。 */
